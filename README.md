@@ -49,7 +49,8 @@
   Arg:
     - tag: top/bottom/middle
   {
-    "image": :image_url
+    "image": :image_url,
+    "tag": :tag
   }
 ```
 ### GET /api/v1/product/
