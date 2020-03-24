@@ -14,11 +14,25 @@
     "otp": :otp
   }
 ```
+### GET /api/v1/preferences/
+```
+  {
+    "all-options": [:option1, :option2, :ioption3, ...],
+    "selected-options":  [:option1, :option2, ...]
+  }
+```
+### POST /api/v1/set-preferences/
+```
+  {
+    "selected-options": [:option1, :option2, :ioption3, ...]
+  }
+```
 ### GET /api/v1/product-category/
 ```
   [{
     "name": :category-name,
     "id": :categroy_id,
+    "image": :category_thumbnail,
     "order": :order_number
    }, ...]
 ```
