@@ -14,14 +14,6 @@
     "otp": :otp
   }
 ```
-### GET /api/v1/landing-section/
-```
-  [{
-    "name": :section_name,
-    "filter_tags": :filter_tags,
-    "order": :section_order
-    }, ...]
-```
 ### GET /api/v1/product-category/
 ```
   [{
@@ -29,6 +21,22 @@
     "id": :categroy_id,
     "order": :order_number
    }, ...]
+```
+### GET /api/v1/product-carousel/
+```
+  [{
+    "name": :product-name,
+    "id": :product_id,
+    ...
+   }, ...]
+```
+### GET /api/v1/spotlight/?tag=top
+```
+  Arg:
+    - tag: top/bottom/middle
+  {
+    "image": :image_url
+  }
 ```
 ### GET /api/v1/product/
 ```
