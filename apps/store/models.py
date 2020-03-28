@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-
 from base.models import BaseDateModel
 from base.validators import validate_mobile_no
 
