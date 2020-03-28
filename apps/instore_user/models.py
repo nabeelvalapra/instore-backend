@@ -9,7 +9,7 @@ from base.validators import validate_mobile_no
 
 
 class InstoreUserManager(BaseUserManager):
-    def create_user(self, username, mobile_no, password=None, random_username=False):
+    def create_user(self, mobile_no, username=None, password=None):
         """
         Creates and saves a User with the given mobile number
         and password.
@@ -18,7 +18,7 @@ class InstoreUserManager(BaseUserManager):
             raise ValueError('Users must have an mobile number')
         validate_mobile_no(mobile_no)
 
-        if random_username:
+        if not username:
             username = str(uuid.uuid4())
 
         user = self.model(

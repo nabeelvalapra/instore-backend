@@ -16,7 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from customer.viewsets import (
+    RequestOTPAPIView, TokenAPIView
+)
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('store/', include('store.urls'))
+    path('store/', include('store.urls')),
+    path('login-otp/', RequestOTPAPIView.as_view(), name='login_otp'),
+    path('auth-token/', TokenAPIView.as_view(), name='auth_token'),
 ]
