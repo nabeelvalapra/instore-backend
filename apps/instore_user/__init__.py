@@ -1,0 +1,1 @@
+default_app_config = 'instore_user.apps.InstoreUserConfig'

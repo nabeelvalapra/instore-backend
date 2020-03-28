@@ -41,11 +41,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'instore_user',
     'rest_framework',
     'rest_framework.authtoken',
     'store',
     'customer'
 ]
+
+# User Model
+AUTH_USER_MODEL = 'instore_user.InstoreUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
