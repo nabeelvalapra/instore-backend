@@ -4,14 +4,17 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from instore_user.models import InstoreUser 
+from instore_user.models import InstoreUser
+
+from rest_framework.authtoken.models import Token
 
 
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    password2 = forms.CharField(
+        label='Password confirmation', widget=forms.PasswordInput)
 
     class Meta:
         model = InstoreUser
@@ -43,14 +46,22 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = InstoreUser
-        fields = ('username', 'mobile_no', 'is_active', 'is_admin',
-            'is_superuser')
+        fields = ('username', 'mobile_no', 'is_active', 'is_owner',
+                  'is_superuser')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if user.is_owner:
+            token, _ = Token.objects.get_or_create(user=user)
+        if commit:
+            user.save()
+        return user
 
 
 class InstoreUserAdmin(BaseUserAdmin):
@@ -61,11 +72,12 @@ class InstoreUserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('username', 'mobile_no', 'is_admin', 'is_superuser')
-    list_filter = ('is_admin', 'is_superuser')
+    list_display = ('username', 'mobile_no', 'is_owner', 'is_superuser')
+    list_filter = ('is_owner', 'is_superuser')
     fieldsets = (
         ('Basic Info', {'fields': ('username', 'mobile_no', 'password')}),
-        ('Permissions', {'fields': ('is_admin', 'is_superuser')}),
+        ('Permissions', {'fields': ('is_owner', 'is_superuser')}),
+
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.

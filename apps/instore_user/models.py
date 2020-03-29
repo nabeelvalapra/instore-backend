@@ -23,7 +23,7 @@ class InstoreUserManager(BaseUserManager):
 
         user = self.model(
             username=username,
-            mobile_no=mobile_no 
+            mobile_no=mobile_no
         )
 
         user.set_password(password)
@@ -41,7 +41,7 @@ class InstoreUserManager(BaseUserManager):
             password=password
         )
         user.is_superuser = True
-        user.is_admin = True
+        user.is_owner = True
         user.save(using=self._db)
         return user
 
@@ -50,10 +50,10 @@ class InstoreUser(AbstractBaseUser):
     username = models.CharField(
         verbose_name="Username", max_length=40, unique=True)
     mobile_no = models.CharField(
-        verbose_name="Mobile Number", max_length=10  
+        verbose_name="Mobile Number", max_length=10
     )
     is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
+    is_owner = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
     objects = InstoreUserManager()
@@ -62,7 +62,11 @@ class InstoreUser(AbstractBaseUser):
     REQUIRED_FIELDS = ['mobile_no']
 
     def __str__(self):
-        return self.mobile_no
+        try:
+            uuid.UUID(self.username)
+            return self.mobile_no
+        except ValueError:
+            return "{} ({})".format(self.mobile_no, self.username)
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
@@ -78,5 +82,4 @@ class InstoreUser(AbstractBaseUser):
     def is_staff(self):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
-        return self.is_admin
-
+        return self.is_owner
