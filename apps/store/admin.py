@@ -9,3 +9,9 @@ class ProductInline(admin.TabularInline):
 @admin.register(Store)
 class StoreAdmin(admin.ModelAdmin):
     inlines = [ProductInline, ]
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(owner=request.user)
