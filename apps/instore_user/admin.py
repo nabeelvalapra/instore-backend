@@ -6,8 +6,6 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 from instore_user.models import InstoreUser
 
-from rest_framework.authtoken.models import Token
-
 
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
@@ -57,8 +55,6 @@ class UserChangeForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        if user.is_owner or user.is_superuser:
-            token, _ = Token.objects.get_or_create(user=user)
         if commit:
             user.save()
         return user
