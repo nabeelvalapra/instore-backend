@@ -16,6 +16,10 @@ class Store(BaseDateModel):
     logo = models.ImageField(
         upload_to="store/logo"
     )
+    domain_name = models.CharField(
+        verbose_name="Domain Name",
+        max_length=40
+    )
 
     def __str__(self):
         return self.name

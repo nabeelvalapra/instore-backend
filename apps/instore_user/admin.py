@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.sites.models import Site
 
 from instore_user.models import InstoreUser
 from instore_user.forms import UserChangeForm, UserCreationForm
@@ -46,6 +47,16 @@ admin.site.register(InstoreUser, InstoreUserAdmin)
 # Since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)
+
+
+# Now register the new Customized Admin Site.
+admin.site.unregister(Site)
+@admin.register(Site)
+class SiteAdmin(admin.ModelAdmin):
+    def has_module_permission(self, request):
+        if request.user.is_superuser:
+            return True
+        return False
 
 
 # Patch the TokenAdmin module permission, so only

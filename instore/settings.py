@@ -28,8 +28,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
-     'django_extensions',
+    'django_extensions',
 
     'instore_user',
     'rest_framework',
@@ -132,3 +133,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+ALLOWED_HOSTS = [
+    "localhost",
+    "google.com",
+]
