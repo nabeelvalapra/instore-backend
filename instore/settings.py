@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+     'django_extensions',
+
     'instore_user',
     'rest_framework',
     'rest_framework.authtoken',
@@ -76,7 +78,7 @@ WSGI_APPLICATION = 'instore.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'instore_db',                      
+        'NAME': 'instore_db',
         'USER': 'postgres',
         'PASSWORD': '',
         'HOST': 'localhost',

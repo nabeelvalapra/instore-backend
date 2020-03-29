@@ -17,4 +17,15 @@ class Store(BaseDateModel):
         upload_to="store/logo"
     )
 
+    def __str__(self):
+        return self.name
 
+
+class Product(BaseDateModel):
+    store = models.ForeignKey(Store, on_delete=models.CASCADE)
+    name = models.CharField(
+        verbose_name="Product Name",
+        max_length=40)
+
+    def __str__(self):
+        return self.name

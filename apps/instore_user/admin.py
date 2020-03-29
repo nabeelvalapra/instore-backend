@@ -72,7 +72,7 @@ class InstoreUserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('username', 'mobile_no', 'is_owner', 'is_superuser')
+    list_display = ('id', 'username', 'mobile_no', 'is_owner', 'is_superuser')
     list_filter = ('is_owner', 'is_superuser')
     fieldsets = (
         ('Basic Info', {'fields': ('username', 'mobile_no', 'password')}),
