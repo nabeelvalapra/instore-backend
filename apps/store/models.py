@@ -16,3 +16,5 @@ class Store(BaseDateModel):
     logo = models.ImageField(
         upload_to="store/logo"
     )
+
+

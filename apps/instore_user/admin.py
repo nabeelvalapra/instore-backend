@@ -57,7 +57,7 @@ class UserChangeForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        if user.is_owner:
+        if user.is_owner or user.is_superuser:
             token, _ = Token.objects.get_or_create(user=user)
         if commit:
             user.save()
