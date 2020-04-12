@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.utils.translation import gettext as _
 
 from base.models import BaseDateModel
 
@@ -7,17 +8,19 @@ from base.models import BaseDateModel
 class Store(BaseDateModel):
     owner = models.OneToOneField(
         get_user_model(),
-        verbose_name="Owner",
-        on_delete=models.CASCADE)
+        verbose_name=_("Owner"),
+        on_delete=models.CASCADE
+    )
     name = models.CharField(
-        verbose_name="Store Name",
-        max_length=40)
+        verbose_name=_("Store Name"),
+        max_length=40
+    )
     email = models.EmailField()
     logo = models.ImageField(
         upload_to="store/logo"
     )
     domain_name = models.CharField(
-        verbose_name="Domain Name",
+        verbose_name=_("Domain Name"),
         max_length=40
     )
 
@@ -25,11 +28,90 @@ class Store(BaseDateModel):
         return self.name
 
 
-class Product(BaseDateModel):
-    store = models.ForeignKey(Store, on_delete=models.CASCADE)
+class Spotlight(BaseDateModel):
+    order = models.IntegerField(
+        verbose_name=_("Order Number"),
+    )
+    image = models.ImageField(
+        upload_to="store/spotlights"
+    )
+    product = models.ForeignKey(
+        "store.Product",
+        on_delete=models.CASCADE,
+        null=True, blank=True
+    )
+
+
+class Category(BaseDateModel):
     name = models.CharField(
-        verbose_name="Product Name",
-        max_length=40)
+        verbose_name=_("Categroy Name"),
+        max_length=15
+    )
 
     def __str__(self):
         return self.name
+
+
+class Tag(BaseDateModel):
+    name = models.CharField(
+        verbose_name=_("Tag Name"),
+        max_length=25
+    )
+
+    def __str__(self):
+        return self.name
+
+
+class Product(BaseDateModel):
+
+    class AvailabilityChoices(models.TextChoices):
+        OUT_OF_STOCK = 0, _("Out of Stock")
+        AVAILABLE = 1, _("Available")
+        FAST_MOVING = 2, _("Fast Moving")
+
+    store = models.ForeignKey(
+        Store,
+        on_delete=models.CASCADE
+    )
+    price = models.IntegerField(
+        verbose_name=_("Price"),
+        default=0
+    )
+    name = models.CharField(
+        verbose_name=_("Product Name"),
+        max_length=40
+    )
+    description = models.TextField(
+        verbose_name=_("Product Description"),
+        null=True, blank=True
+    )
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        null=True, blank=True
+    )
+    tag = models.ForeignKey(
+        Tag,
+        on_delete=models.CASCADE,
+        null=True, blank=True
+    )
+    availability = models.CharField(
+        verbose_name=_("Availability Status"),
+        max_length=1,
+        choices=AvailabilityChoices.choices,
+        default=AvailabilityChoices.AVAILABLE
+    )
+
+    def __str__(self):
+        return self.name
+
+
+class ProductImages(BaseDateModel):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE
+    )
+    image = models.ImageField(
+        verbose_name=_("Product Images"),
+        upload_to="store/product/images"
+    )

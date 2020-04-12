@@ -36,8 +36,8 @@ class InstoreUserManager(BaseUserManager):
         and password.
         """
         user = self.create_user(
-            username,
             mobile_no,
+            username,
             password=password
         )
         user.is_superuser = True
