@@ -1,5 +1,5 @@
 from django.contrib import admin
-from store.models import Store, Product, ProductImages
+from store.models import Store, Product, ProductImage
 
 
 class ProductInline(admin.TabularInline):
@@ -21,7 +21,7 @@ class StoreAdmin(admin.ModelAdmin):
 
 
 class ProudctImageInline(admin.StackedInline):
-    model = ProductImages
+    model = ProductImage
 
 
 @admin.register(Product)

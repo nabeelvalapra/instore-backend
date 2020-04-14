@@ -106,11 +106,13 @@ class Product(BaseDateModel):
         return self.name
 
 
-class ProductImages(BaseDateModel):
+class ProductImage(BaseDateModel):
     product = models.ForeignKey(
         Product,
+        related_name="product_images",
         on_delete=models.CASCADE
     )
+    order = models.IntegerField(default=0)
     image = models.ImageField(
         verbose_name=_("Product Images"),
         upload_to="store/product/images"
