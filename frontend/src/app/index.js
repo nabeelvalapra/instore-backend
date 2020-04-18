@@ -4,14 +4,14 @@ import {
   Route
 } from 'react-router-dom';
 
-import HomeComponent from './home/HomeComponent';
+import HomeContainer from './home/HomeContainer';
 
 class App extends Component {
   render() {
     return (
       <Router>
         <div>
-          <Route exact path='/' component={HomeComponent} />
+          <Route exact path='/' component={HomeContainer} />
         </div>
       </Router>
     );
