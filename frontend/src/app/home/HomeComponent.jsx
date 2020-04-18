@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class HomeComponent extends Component {
   componentDidMount() {
-    this.props.requestStoreDetails()
+    this.props.fetchStoreDetails()
   }
 
   render () {

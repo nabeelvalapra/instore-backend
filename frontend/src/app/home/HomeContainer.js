@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import HomeComponent from './HomeComponent';
-import { requestStoreDetails } from './duck/actions';
+import { fetchStoreDetails } from './duck/actions';
 
 const mapStateToProps = state => {
     return { state } 
@@ -8,7 +8,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    requestStoreDetails: () => dispatch(requestStoreDetails())
+    fetchStoreDetails: () => dispatch(fetchStoreDetails())
   }
 };
 
