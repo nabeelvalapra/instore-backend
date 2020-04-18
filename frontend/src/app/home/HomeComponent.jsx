@@ -1,11 +1,13 @@
-
 import React, { Component } from 'react';
 
 class HomeComponent extends Component {
   componentDidMount() {
     this.props.requestStoreDetails()
   }
+
   render () {
+    console.log(this.props.state)
+    
     return (
         <div>
           Username: {}

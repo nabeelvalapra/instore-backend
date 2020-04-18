@@ -3,7 +3,7 @@ import HomeComponent from './HomeComponent';
 import { requestStoreDetails } from './duck/actions';
 
 const mapStateToProps = state => {
-  return {} 
+    return { state } 
 };
 
 const mapDispatchToProps = dispatch => {

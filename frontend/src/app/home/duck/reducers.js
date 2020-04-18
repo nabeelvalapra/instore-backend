@@ -1,10 +1,15 @@
 import types from './types';
 
 
-function requestStore(state = false, action) {
+export const storeDetail = (state, action) => {
   switch (action.type) {
-    case types.REQUEST_STORE:
-      return true
+    case types.REQUEST_STORE_DETAILS:
+      return Object.assign({}, state, {
+          completed: true
+      })
     default:
-      return state
+      return Object.assign({}, state, {
+          completed: false
+      })
+  }
 }
