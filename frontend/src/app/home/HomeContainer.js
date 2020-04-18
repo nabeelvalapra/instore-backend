@@ -1,12 +1,15 @@
 import { connect } from 'react-redux';
 import HomeComponent from './HomeComponent';
+import { requestStoreDetails } from './duck/actions';
 
 const mapStateToProps = state => {
   return {} 
 };
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    requestStoreDetails: () => dispatch(requestStoreDetails())
+  }
 };
 
 const HomeContainer = connect(

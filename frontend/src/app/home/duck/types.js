@@ -1,0 +1,7 @@
+const REQUEST_STORE = 'REQUEST_STORE';
+const RECEIVE_STORE = 'RECEIVE_STORE';
+
+export default {
+    REQUEST_STORE,
+    RECEIVE_STORE
+}
