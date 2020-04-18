@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     'django_extensions',
+    'corsheaders',
 
     'instore_user',
     'rest_framework',
@@ -46,6 +47,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -138,4 +140,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 ALLOWED_HOSTS = [
     "localhost",
     "google.com",
+]
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
 ]
