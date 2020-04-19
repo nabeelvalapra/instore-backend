@@ -1,7 +1,7 @@
 import fetch from 'cross-fetch'
 import types from './types';
 
-import APIURL from '../../common'
+import { APIURL } from '../../common'
 
 
 export function requestStoreDetails() {
@@ -10,8 +10,7 @@ export function requestStoreDetails() {
     }
 }
 
-export function responseStoreDetails(json) {
-    console.log(json)
+export function receiveStoreDetails(json) {
     return {
         type: types.RECEIVE_STORE_DETAILS,
         json
@@ -27,7 +26,7 @@ export function fetchStoreDetails() {
                 error => console.log("Error" + error)
             )
             .then(
-                json => dispatch(responseStoreDetails(json))
+                json => dispatch(receiveStoreDetails(json[0]))
             )
     }
 }

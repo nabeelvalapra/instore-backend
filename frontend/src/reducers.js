@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux'
-import { storeDetail } from './app/home/duck/reducers'
+import { requestStoreDetail } from './app/home/duck/reducers'
 
-export default combineReducers({storeDetail})
+export default combineReducers({requestStoreDetail})

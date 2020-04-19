@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 
 class HomeComponent extends Component {
   componentDidMount() {
@@ -6,16 +7,19 @@ class HomeComponent extends Component {
   }
 
   render () {
-    console.log(this.props.state)
-    
+    if(this.props.isFetching){
+      return (
+        <div>Fetching details...</div>
+      )
+    }
     return (
         <div>
-          Username: {}
+          Username:
           <br></br>
           <br></br>
-          Logo: 
+          Store Name: {this.props.storeDetails.storeName}
           <br></br>
-          Store Name:
+          Logo: {this.props.storeDetails.storeLogo}
           <br></br>
           <br></br>
           Spotlight Image:
@@ -49,7 +53,11 @@ class HomeComponent extends Component {
         </div>
       )
     }
-  
 }
 
+HomeComponent.propTypes = {
+    fetchStoreDetails: PropTypes.func.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    storeDetails: PropTypes.object.isRequired,
+}
 export default HomeComponent;
