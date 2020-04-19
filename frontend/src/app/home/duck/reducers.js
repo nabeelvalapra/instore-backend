@@ -6,7 +6,6 @@ export const requestStoreDetail = (state, action) => {
     case types.REQUEST_STORE_DETAILS:
       return Object.assign({}, state, {
           isFetching: true,
-          storeDetails: {}
       })
     case types.RECEIVE_STORE_DETAILS:
       let json = action.json
@@ -20,7 +19,6 @@ export const requestStoreDetail = (state, action) => {
     default:
       return Object.assign({}, state, {
           isFetching: false,
-          storeDetails: {}
       })
   }
 }
