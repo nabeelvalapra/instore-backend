@@ -14,6 +14,7 @@ class StoreViewSet(mixins.ListModelMixin,
 
 
 class ProductViewSet(mixins.ListModelMixin,
+                     mixins.RetrieveModelMixin,
                      viewsets.GenericViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer

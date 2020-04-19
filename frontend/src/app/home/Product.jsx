@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom';
 
 
 class Products extends Component{
@@ -10,6 +11,10 @@ class Products extends Component{
                 {
                     products.map(product => (
                         <div key={product.name}>
+                        <br/>
+                        Product ID: { product.id }
+                        <br/>
+                        Product URL: <Link to='/product/3'>link</Link>
                         <br/>
                         Product Name: { product.name }
                         <br/>

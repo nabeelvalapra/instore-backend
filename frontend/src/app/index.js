@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 
 import HomeContainer from './home/HomeContainer';
+import ProductContainer from './product/ProductContainer';
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
       <Router>
         <div>
           <Route exact path='/' component={HomeContainer} />
+          <Route path='/product/:productSlug' component={ProductContainer} />
         </div>
       </Router>
     );
