@@ -36,10 +36,10 @@ class HomeContainer extends Component{
 }
 
 const mapStateToProps = state => {
-  const storeIsFetching = state.requestStoreDetail.isFetching;
-  const storeDetails = state.requestStoreDetail.storeDetails;
-  const productIsFetching = state.requestStoreDetail.isFetching;
-  const products = state.requestProducts.products;
+  const storeIsFetching = state.storeDetails.isFetching;
+  const storeDetails = state.storeDetails.storeDetails;
+  const productIsFetching = state.storeDetails.isFetching;
+  const products = state.products.products;
   return { storeIsFetching, storeDetails, productIsFetching, products } 
 };
 

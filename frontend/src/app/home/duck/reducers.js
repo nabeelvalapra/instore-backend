@@ -1,7 +1,7 @@
 import types from './types';
 
 
-export const requestStoreDetail = (state, action) => {
+export const storeDetails = (state, action) => {
   switch (action.type) {
     case types.REQUEST_STORE_DETAILS:
       return Object.assign({}, state, {
@@ -23,7 +23,7 @@ export const requestStoreDetail = (state, action) => {
   }
 }
 
-export const requestProducts = (state, action) => {
+export const products = (state, action) => {
     switch (action.type) {
       case types.REQUEST_PRODUCTS:
         return Object.assign({}, state, {
