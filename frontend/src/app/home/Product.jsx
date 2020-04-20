@@ -14,7 +14,7 @@ class Products extends Component{
                         <br/>
                         Product ID: { product.id }
                         <br/>
-                        Product URL: <Link to='/product/3'>link</Link>
+                        Product URL: <Link to='/product/3/'>link</Link>
                         <br/>
                         Product Name: { product.name }
                         <br/>

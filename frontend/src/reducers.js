@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
-import { storeDetails, products } from './app/home/duck/reducers'
+import { store } from './app/home/duck/reducers'
+import { product } from './app/product/duck/reducers'
 
-export default combineReducers({storeDetails, products})
+export default combineReducers({store, product})

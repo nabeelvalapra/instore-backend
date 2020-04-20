@@ -7,9 +7,9 @@ class Store extends Component {
         return (
             <div>
               <br></br>
-              Store Name: {this.props.storeDetails.storeName}
+              Store Name: {this.props.store.storeName}
               <br></br>
-              Logo: {this.props.storeDetails.storeLogo}
+              Logo: {this.props.store.storeLogo}
               <br></br>
             </div>
           )
@@ -17,6 +17,6 @@ class Store extends Component {
 }
 
 Store.propTypes = {
-  storeDetails: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired,
 }
 export default Store;

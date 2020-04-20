@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Store from './Store';
-import { fetchStoreDetails, fetchProducts } from './duck/actions';
+import { fetchStoreDetails } from './duck/actions';
+import { fetchProducts } from '../product/duck/actions';
 import Products from './Product';
 
 class HomeContainer extends Component{
@@ -13,34 +14,34 @@ class HomeContainer extends Component{
 
   render() {
     const {
-      storeIsFetching, storeDetails, productIsFetching, products
+      storeIsFetching, store, productIsFetching, products
     } = this.props
 
-    var store = (
-      (!storeIsFetching && storeDetails)
-      ? <Store storeDetails={storeDetails}/>
+    var showStore = (
+      (!storeIsFetching && store)
+      ? <Store store={store}/>
       : <div> Fetching store details...</div>
     );
-    var product = (
+    var showProducts = (
       (!productIsFetching && products)
       ? <Products products={products}/>
       : <div> Fetching product details...</div>
     )
     return (
       <div>
-        {store}
-        {product}
+        {showStore}
+        {showProducts}
       </div>
     )
   }
 }
 
 const mapStateToProps = state => {
-  const storeIsFetching = state.storeDetails.isFetching;
-  const storeDetails = state.storeDetails.storeDetails;
-  const productIsFetching = state.storeDetails.isFetching;
-  const products = state.products.products;
-  return { storeIsFetching, storeDetails, productIsFetching, products } 
+  const storeIsFetching = state.store.isFetching;
+  const { store } = state.store;
+  const productIsFetching = state.store.isFetching;
+  const { products } = state.product;
+  return { storeIsFetching, store, productIsFetching, products } 
 };
 
 const mapDispatchToProps = dispatch => {
