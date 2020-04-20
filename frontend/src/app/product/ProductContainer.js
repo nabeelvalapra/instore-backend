@@ -6,22 +6,17 @@ import { fetchProducts } from './duck/actions';
 
 class ProductContainer extends Component{
     componentDidMount() {
-      this.props.fetchProducts(this.props.productSlug)
+      if(!this.props.hasFetched){
+        this.props.fetchProducts(this.props.productSlug)
+      }
     }
 
     render() {
-      const {
-        productIsFetching, products
-      } = this.props
+      const { hasFetched, products } = this.props
 
-      var showProduct = (
-        (!productIsFetching && products)
-        ? <ProductDetail products={this.props.products}/>
-        : <div> Fetching product details...</div>
-      )
       return (
         <div>
-          { showProduct }
+          <ProductDetail hasFetched={hasFetched} products={products}/>
         </div>
       )
     }
@@ -29,9 +24,8 @@ class ProductContainer extends Component{
 
 const mapStateToProps = (state, ownProps) => {
     const { productSlug } = ownProps.match.params
-    const productIsFetching = state.store.isFetching;
-    const { products } = state.product;
-    return { productSlug, productIsFetching, products }
+    const { hasFetched, products } = state.product;
+    return { productSlug, hasFetched, products }
 };
 const mapDispatchToProps = dispatch => {
     return {

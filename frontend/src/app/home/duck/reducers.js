@@ -1,11 +1,17 @@
 import types from './types';
 
 
-export const store = (state, action) => {
+const defaultState = {
+    hasFetched: false,
+    isFetching: false,
+}
+export const store = (state=defaultState, action) => {
+
   switch (action.type) {
 
     case types.REQUEST_STORE_DETAILS:
       return Object.assign({}, state, {
+          hasFetched: false,
           isFetching: true,
       })
 
@@ -13,6 +19,7 @@ export const store = (state, action) => {
       let json = action.json
       return Object.assign({}, state, {
           isFetching: false,
+          hasFetched: true,
           store: {
             "storeName": json.name,
             "storeLogo": json.logo
@@ -20,8 +27,6 @@ export const store = (state, action) => {
       })
 
     default:
-      return Object.assign({}, state, {
-          isFetching: false,
-      })
+      return state
   }
 }

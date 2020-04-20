@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 class Products extends Component{
     render() {
+        if(!this.props.hasFetched){return <div>Product Fetching...</div>}
+
         const products = this.props.products
         return (
             <div>
@@ -14,7 +16,7 @@ class Products extends Component{
                         <br/>
                         Product ID: { product.id }
                         <br/>
-                        Product URL: <Link to='/product/3/'>link</Link>
+                        Product URL: <Link to={`/product/${product.id}/`}>link</Link>
                         <br/>
                         Product Name: { product.name }
                         <br/>

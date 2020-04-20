@@ -17,6 +17,13 @@ export function receiveProducts(json) {
     }
 }
 
+export function receivePartialProduct(json){
+    return {
+        type: types.RECEIVE_PARTIAL_PRODUCT,
+        json
+    }
+}
+
 export function fetchProducts(productId=null) {
     return function(dispatch) {
         dispatch(requestProducts())
@@ -31,7 +38,7 @@ export function fetchProducts(productId=null) {
             )
             .then(
                 json => (productId
-                    ? dispatch(receiveProducts([json]))
+                    ? dispatch(receivePartialProduct(json))
                     : dispatch(receiveProducts(json))
                 )
             )
