@@ -12,11 +12,15 @@ class ProductContainer extends Component{
     }
 
     render() {
-      const { hasFetched, products } = this.props
+      const { productSlug, hasFetched, products } = this.props
+      const product = (products
+        ? products.find(x => x.id === Number(productSlug))
+        : null
+      )
 
       return (
         <div>
-          <ProductDetail hasFetched={hasFetched} products={products}/>
+          <ProductDetail hasFetched={hasFetched} product={product}/>
         </div>
       )
     }
@@ -27,6 +31,7 @@ const mapStateToProps = (state, ownProps) => {
     const { hasFetched, products } = state.product;
     return { productSlug, hasFetched, products }
 };
+
 const mapDispatchToProps = dispatch => {
     return {
       fetchProducts: (productId) => dispatch(fetchProducts(productId))
