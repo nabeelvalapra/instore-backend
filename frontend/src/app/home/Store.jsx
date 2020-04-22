@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 
 class Store extends Component {
     render() {
-        if(!this.props.hasFetched){return <div>Store Fetching...</div>}
         return (
             <div>
               <br></br>

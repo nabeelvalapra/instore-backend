@@ -3,12 +3,7 @@ import { Link } from 'react-router-dom';
 
 class ProductDetail extends Component{
     render() {
-        const { hasFetched, product } = this.props
-
-        if (!hasFetched){
-          return <div>Fetching product details...</div>
-        }
-
+        const { product } = this.props
         return (
           <div>
             <Link to="/">Back Home</Link>

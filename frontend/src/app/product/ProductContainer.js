@@ -6,36 +6,41 @@ import { fetchProducts } from './duck/actions';
 
 class ProductContainer extends Component{
     componentDidMount() {
-      if(!this.props.hasFetched){
-        this.props.fetchProducts(this.props.productSlug)
+      const { productSlug, productIsFetching, products, fetchProducts } = this.props
+      if(!productIsFetching && !products){
+        fetchProducts(productSlug)
       }
     }
 
     render() {
-      const { productSlug, hasFetched, products } = this.props
+      const { productSlug, productIsFetching, products } = this.props
       const product = (products
         ? products.find(x => x.id === Number(productSlug))
-        : null
+        : undefined 
       )
 
       return (
         <div>
-          <ProductDetail hasFetched={hasFetched} product={product}/>
+          {(!productIsFetching && product)
+            ? <ProductDetail product={product}/>
+            : <p>Fetching products ...</p>
+          }
         </div>
       )
     }
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const { productSlug } = ownProps.match.params
-    const { hasFetched, products } = state.product;
-    return { productSlug, hasFetched, products }
+  const { productSlug } = ownProps.match.params
+  const productIsFetching = state.product.isFetching;
+  const products = state.product.items;
+  return { productSlug, productIsFetching, products }
 };
 
 const mapDispatchToProps = dispatch => {
-    return {
-      fetchProducts: (productId) => dispatch(fetchProducts(productId))
-    }
+  return {
+    fetchProducts: (productId) => dispatch(fetchProducts(productId))
+  }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductContainer);

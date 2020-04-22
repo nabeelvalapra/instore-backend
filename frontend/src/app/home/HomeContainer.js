@@ -8,7 +8,7 @@ import Products from './Product';
 class HomeContainer extends Component{
 
   componentDidMount() {
-    if(!this.props.storeFetched){
+    if(!this.props.storeIsFetching && !this.props.store){
       this.props.fetchStoreDetails()
       this.props.fetchProducts()
     }
@@ -16,24 +16,32 @@ class HomeContainer extends Component{
 
   render() {
     const {
-      storeFetched, store, productFetched, products
+      storeIsFetching, store, productsIsFetching, products
     } = this.props
 
     return (
       <div>
-        <Store hasFetched={storeFetched} store={store}/>
-        <Products hasFetched={productFetched} products={products}/>
+        {(!storeIsFetching && store)
+          ? <Store store={store}/>
+          : <p>Fetching store details...</p>
+        }
+        {(!productsIsFetching && products)
+          ? <Products products={products}/>
+          : <p>Fetching products ...</p>
+        }
       </div>
     )
   }
 }
 
 const mapStateToProps = state => {
-  const storeFetched = state.store.hasFetched;
   const { store } = state.store;
-  const productFetched = state.product.hasFetched;
-  const { products } = state.product;
-  return { storeFetched, store, productFetched, products } 
+  const products = state.product.items;
+
+  const storeIsFetching = state.store.isFetching;
+  const productsIsFetching = state.product.isFetching;
+
+  return { storeIsFetching, store, productsIsFetching, products } 
 };
 
 const mapDispatchToProps = dispatch => {
