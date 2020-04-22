@@ -4,29 +4,40 @@ import types from './types';
 import { APIURL } from '../../common'
 
 
-export function requestProducts() {
+export function requestHomeProducts() {
   return {
-    type: types.REQUEST_PRODUCTS
+    type: types.REQUEST_HOME_PRODUCTS
   }
 }
 
-export function receiveProducts(json) {
+export function receiveHomeProducts(json) {
   return {
-    type: types.RECEIVE_PRODUCTS,
+    type: types.RECEIVE_HOME_PRODUCTS,
     json
   }
 }
 
-export function receivePartialProduct(json){
+export function requestSingleProduct(productId){
   return {
-    type: types.RECEIVE_PARTIAL_PRODUCT,
+    type: types.REQUEST_SINGLE_PRODUCT,
+  }
+}
+
+export function receiveSingleProduct(json){
+  return {
+    type: types.RECEIVE_SINGLE_PRODUCT,
     json
   }
 }
 
 export function fetchProducts(productId=null) {
   return function(dispatch) {
-    dispatch(requestProducts())
+    dispatch(
+      (productId
+        ? requestSingleProduct(productId)
+        : requestHomeProducts()
+      )
+    )
     let endpoint = (productId
       ? `${APIURL}/store/products/${productId}/`
       : `${APIURL}/store/products/`
@@ -34,12 +45,12 @@ export function fetchProducts(productId=null) {
     return fetch(endpoint)
       .then(
         response => response.json(),
-        error => console.log("Fetch Product Error" + error)
+        error => { throw error }
       )
       .then(
         json => (productId
-          ? dispatch(receivePartialProduct(json))
-          : dispatch(receiveProducts(json))
+          ? dispatch(receiveSingleProduct(json))
+          : dispatch(receiveHomeProducts(json))
         )
       )
   }

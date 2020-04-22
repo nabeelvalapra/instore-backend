@@ -7,18 +7,23 @@ const initialState = {
 export const product = (state=initialState, action) => {
     switch (action.type) {
 
-      case types.REQUEST_PRODUCTS:
+      case types.REQUEST_HOME_PRODUCTS:
         return Object.assign({}, state, {
           isFetching: true,
         })
 
-      case types.RECEIVE_PRODUCTS:
+      case types.RECEIVE_HOME_PRODUCTS:
         return Object.assign({}, state, {
           isFetching: false,
           items: action.json
         })
 
-      case types.RECEIVE_PARTIAL_PRODUCT:
+      case types.REQUEST_SINGLE_PRODUCT:
+        return Object.assign({}, state, {
+          isFetching: true,
+        })
+
+      case types.RECEIVE_SINGLE_PRODUCT:
         return Object.assign({}, state, {
           isFetching: false,
           items: [action.json]

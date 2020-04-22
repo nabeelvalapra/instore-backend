@@ -23,7 +23,7 @@ export function fetchStoreDetails() {
         return fetch(`${APIURL}/store/`)
             .then(
                 response => response.json(),
-                error => console.log("Fetch Store Detail Error" + error)
+                error => { throw error }
             )
             .then(
                 json => dispatch(receiveStoreDetails(json[0]))
