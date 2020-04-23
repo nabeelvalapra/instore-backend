@@ -4,29 +4,38 @@ import types from './types';
 import { APIURL } from '../../common'
 
 
-export function requestStoreDetails() {
-    return {
-      type: types.REQUEST_STORE_DETAILS
-    }
+export function fetchStoreDetailRequest() {
+  return {
+    type: types.FETCH_STORE_DETAIL_REQUEST
+  }
 }
 
-export function receiveStoreDetails(json) {
-    return {
-        type: types.RECEIVE_STORE_DETAILS,
-        json
-    }
+export function fetchStoreDetailSuccess(json) {
+  return {
+    type: types.FETCH_STORE_DETAIL_SUCCESS,
+    json
+  }
+}
+
+export function fetchStoreDetailFailed(errorMsg) {
+  return {
+    type: types.FETCH_STORE_DETAIL_FAILED,
+    errorMsg
+  }
 }
 
 export function fetchStoreDetails() {
     return function(dispatch) {
-        dispatch(requestStoreDetails())
+        dispatch(fetchStoreDetailRequest())
         return fetch(`${APIURL}/store/`)
             .then(
                 response => response.json(),
-                error => { throw error }
             )
             .then(
-                json => dispatch(receiveStoreDetails(json[0]))
+                json => dispatch(fetchStoreDetailSuccess(json[0]))
+            )
+            .catch(
+                error => dispatch(fetchStoreDetailFailed(error.message))
             )
     }
 }

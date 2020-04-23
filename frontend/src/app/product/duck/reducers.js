@@ -4,6 +4,7 @@ import types from './types';
 const initialState = {
   isFetching: false,
 }
+
 export const product = (state=initialState, action) => {
     switch (action.type) {
 
