@@ -8,26 +8,26 @@ const initialState = {
 export const product = (state=initialState, action) => {
     switch (action.type) {
 
-      case types.REQUEST_HOME_PRODUCTS:
+      case types.FETCH_PRODUCTS_REQUEST:
         return Object.assign({}, state, {
           isFetching: true,
         })
 
-      case types.RECEIVE_HOME_PRODUCTS:
+      case types.FETCH_PRODUCTS_SUCCESS:
+        const productsToDict = action.json.reduce(function(result, item) {
+          result[item.id] = item;
+          return result;
+        }, {})
+
         return Object.assign({}, state, {
           isFetching: false,
-          items: action.json
+          items: productsToDict
         })
 
-      case types.REQUEST_SINGLE_PRODUCT:
-        return Object.assign({}, state, {
-          isFetching: true,
-        })
-
-      case types.RECEIVE_SINGLE_PRODUCT:
+      case types.FETCH_PRODUCTS_FAILED:
         return Object.assign({}, state, {
           isFetching: false,
-          items: [action.json]
+          error: action.errorMsg
         })
 
       default:

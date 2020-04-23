@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 class Products extends Component{
     render() {
-        const products = this.props.products
+        var products = Object.values(this.props.products)
         return (
             <div>
                 {
@@ -32,6 +32,6 @@ class Products extends Component{
 }
 
 Products.propTypes = {
-    products: PropTypes.array,
+    products: PropTypes.object,
 }
 export default Products

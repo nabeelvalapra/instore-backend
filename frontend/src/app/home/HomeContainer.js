@@ -16,23 +16,24 @@ class HomeContainer extends Component{
 
   render() {
     const {
-      storeIsFetching, store, storeError, productsIsFetching, products
+      storeIsFetching, store, storeError,
+      productsIsFetching, products, productsError
     } = this.props
 
-    console.log(storeError)
     return (
       <div>
         {(!storeIsFetching && store)
           ? <Store store={store}/>
-          // : <p>Fetching store details...</p>
           : ((!storeIsFetching && storeError)
               ? <p> { storeError } </p>
-              : <p> Fetching Store details...</p>)
+              : <p> Fetching store details...</p>)
 
         }
         {(!productsIsFetching && products)
           ? <Products products={products}/>
-          : <p>Fetching products ...</p>
+          : ((!productsIsFetching && productsError))
+              ? <p> { productsError } </p>
+              : <p> Fetching product details ...</p>
         }
       </div>
     )
@@ -41,13 +42,14 @@ class HomeContainer extends Component{
 
 const mapStateToProps = state => {
   const { store } = state.store;
-  const products = state.product.items;
-
   const storeIsFetching = state.store.isFetching;
   const storeError = state.store.error;
-  const productsIsFetching = state.product.isFetching;
 
-  return { storeIsFetching, store, storeError, productsIsFetching, products } 
+  const products = state.product.items;
+  const productsIsFetching = state.product.isFetching;
+  const productsError = state.product.error;
+
+  return { storeIsFetching, store, storeError, productsIsFetching, products, productsError} 
 };
 
 const mapDispatchToProps = dispatch => {
