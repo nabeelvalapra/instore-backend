@@ -2,7 +2,7 @@ import types from './types';
 
 
 const initialState = {
-    isFetching: false,
+  isFetching: false,
 }
 
 export const store = (state=initialState, action) => {

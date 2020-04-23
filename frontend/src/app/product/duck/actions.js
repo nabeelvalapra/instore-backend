@@ -4,40 +4,29 @@ import types from './types';
 import { APIURL } from '../../common'
 
 
-export function requestHomeProducts() {
+export function fetchProductsRequest() {
   return {
-    type: types.REQUEST_HOME_PRODUCTS
+    type: types.FETCH_PRODUCTS_REQUEST
   }
 }
 
-export function receiveHomeProducts(json) {
+export function fetchProductsSuccess(json) {
   return {
-    type: types.RECEIVE_HOME_PRODUCTS,
+    type: types.FETCH_PRODUCTS_SUCCESS,
     json
   }
 }
 
-export function requestSingleProduct(productId){
+export function fetchProductsFailed(errorMsg){
   return {
-    type: types.REQUEST_SINGLE_PRODUCT,
-  }
-}
-
-export function receiveSingleProduct(json){
-  return {
-    type: types.RECEIVE_SINGLE_PRODUCT,
-    json
+    type: types.FETCH_PRODUCTS_FAILED,
+    errorMsg
   }
 }
 
 export function fetchProducts(productId=null) {
   return function(dispatch) {
-    dispatch(
-      (productId
-        ? requestSingleProduct(productId)
-        : requestHomeProducts()
-      )
-    )
+    dispatch(fetchProductsRequest())
     let endpoint = (productId
       ? `${APIURL}/store/products/${productId}/`
       : `${APIURL}/store/products/`
@@ -45,13 +34,12 @@ export function fetchProducts(productId=null) {
     return fetch(endpoint)
       .then(
         response => response.json(),
-        error => { throw error }
       )
       .then(
-        json => (productId
-          ? dispatch(receiveSingleProduct(json))
-          : dispatch(receiveHomeProducts(json))
-        )
+        json => dispatch(fetchProductsSuccess((productId ? [json] : json)))
+      )
+      .catch(
+        error => dispatch(fetchProductsFailed(error.message))
       )
   }
 }
