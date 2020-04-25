@@ -4,19 +4,33 @@ import { Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux'
-
-import rootReducer from './reducers'
+import { createBrowserHistory } from 'history'
+import { routerMiddleware } from 'connected-react-router'
 
 import App from './app';
 
+import { combineReducers } from 'redux'
+import { auth } from './app/common/reducers/auth'
+import { store as homeStore} from './app/home/duck/reducers'
+import { product } from './app/product/duck/reducers'
+import { connectRouter } from 'connected-react-router'
+
+const history = createBrowserHistory()
+const rootReducer = combineReducers(
+  {auth, product, store: homeStore, router: connectRouter(history)}
+)
+
 const loggerMiddleware = createLogger()
-const store = createStore(rootReducer, applyMiddleware(
-  thunkMiddleware, loggerMiddleware)
+const store = createStore(
+  rootReducer,
+  applyMiddleware(
+    thunkMiddleware, loggerMiddleware, routerMiddleware(history)
+  )
 )
 
 render(
   <Provider store={store}>
-    <App />
+    <App history={history}/>
   </Provider>,
   document.getElementById('root')
 )

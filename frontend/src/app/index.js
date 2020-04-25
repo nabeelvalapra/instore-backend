@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom';
+import { Route, Switch } from 'react-router'
+import { ConnectedRouter } from 'connected-react-router'
 
+import requireAuth from '../app/common/requireAuth';
 import HomeContainer from './home/HomeContainer';
 import ProductContainer from './product/ProductContainer';
+
 
 class App extends Component {
   render() {
     return (
-      <Router>
-        <div>
+      <ConnectedRouter history={this.props.history}>
+        <Switch>
           <Route exact path='/' component={HomeContainer} />
-          <Route path='/product/:productSlug/' component={ProductContainer} />
-        </div>
-      </Router>
+          <Route path='/product/:productSlug/' component={requireAuth(ProductContainer)}/>
+        </Switch>
+      </ConnectedRouter>
     );
   }
 }
