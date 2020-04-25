@@ -1,49 +1,12 @@
 import uuid
+import pytz
+
+from datetime import datetime, timedelta
 
 from django.db import models
-from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser
-)
+from django.contrib.auth.models import AbstractBaseUser
 
-from base.validators import validate_mobile_no
-
-
-class InstoreUserManager(BaseUserManager):
-    def create_user(self, mobile_no, username=None, password=None):
-        """
-        Creates and saves a User with the given mobile number
-        and password.
-        """
-        if not mobile_no:
-            raise ValueError('Users must have an mobile number')
-        validate_mobile_no(mobile_no)
-
-        if not username:
-            username = str(uuid.uuid4())
-
-        user = self.model(
-            username=username,
-            mobile_no=mobile_no
-        )
-
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, username, mobile_no, password=None):
-        """
-        Creates and saves a superuser with the given mobile number
-        and password.
-        """
-        user = self.create_user(
-            mobile_no,
-            username,
-            password=password
-        )
-        user.is_superuser = True
-        user.is_owner = True
-        user.save(using=self._db)
-        return user
+from instore_user.managers import InstoreUserManager
 
 
 class InstoreUser(AbstractBaseUser):
@@ -86,3 +49,26 @@ class InstoreUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_owner
+
+
+class OTPData(models.Model):
+    user = models.ForeignKey(
+        InstoreUser,
+        on_delete=models.CASCADE
+    )
+    otp = models.IntegerField(
+        verbose_name="OTP", max_length=4
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    @property
+    def expiry_datetime(self):
+        return self.created_at + timedelta(minutes=10)
+
+    def has_expired(self):
+        curr_time = datetime.now(pytz.utc)
+        if curr_time > self.expiry_datetime:
+            return True
+        return False

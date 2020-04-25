@@ -2,18 +2,12 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 from base.models import BaseDateModel
-from base.validators import validate_mobile_no
 from store.models import Store
 
 
 class Customer(BaseDateModel):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
-    mobile_no = models.CharField(
-        verbose_name="Mobile Number",
-        max_length=10,
-        validators=[validate_mobile_no]
-    )
     first_name = models.CharField(
         verbose_name="Your Name",
         max_length=30,
