@@ -17,10 +17,10 @@ class InstoreUserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('id', 'username', 'mobile_no', 'is_owner', 'is_superuser')
+    list_display = ('id', 'username', 'site', 'mobile_no', 'is_owner', 'is_superuser')
     list_filter = ('is_owner', 'is_superuser')
     fieldsets = (
-        ('Basic Info', {'fields': ('username', 'mobile_no', 'password')}),
+        ('Basic Info', {'fields': ('mobile_no', 'password')}),
         ('Permissions', {'fields': ('is_owner', 'is_superuser')}),
 
     )
@@ -29,10 +29,10 @@ class InstoreUserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'mobile_no', 'password1', 'password2'),
+            'fields': ('mobile_no', 'site', 'password1', 'password2'),
         }),
     )
-    search_fields = ('username', 'mobile_no',)
+    search_fields = ('mobile_no',)
     ordering = ('mobile_no',)
     filter_horizontal = ()
 

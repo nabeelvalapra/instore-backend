@@ -1,5 +1,4 @@
 from rest_framework import viewsets, mixins
-from rest_framework.permissions import IsAuthenticated
 
 from store.serializers import StoreSerializer, ProductSerializer
 from store.models import Store, Product
@@ -12,18 +11,15 @@ class StoreViewSet(
     serializer_class = StoreSerializer
 
     def get_queryset(self):
-        return self.queryset.filter(domain_name=self.request.site.domain)
+        return self.queryset.filter(site=self.request.site)
 
 
 class ProductViewSet(
     mixins.ListModelMixin, mixins.RetrieveModelMixin,
     viewsets.GenericViewSet
 ):
-    permission_classes = [IsAuthenticated]
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
     def get_queryset(self):
-        return self.queryset.filter(
-            store__domain_name=self.request.site.domain
-        )
+        return self.queryset.filter(store__site=self.request.site)

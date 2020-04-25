@@ -13,7 +13,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = InstoreUser
-        fields = ('username', 'mobile_no', )
+        fields = ('mobile_no', 'site')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -27,6 +27,9 @@ class UserCreationForm(forms.ModelForm):
         # Save the provided password in hashed format
         user = super().save(commit=False)
         user.set_password(self.cleaned_data["password1"])
+        user.username = "{}@{}".format(
+            self.cleaned_data['mobile_no'], self.cleaned_data['site']
+        )
         if commit:
             user.save()
         return user
@@ -41,8 +44,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = InstoreUser
-        fields = ('username', 'mobile_no', 'is_active', 'is_owner',
-                  'is_superuser')
+        fields = ('mobile_no', 'is_active', 'is_owner', 'is_superuser')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -55,5 +57,3 @@ class UserChangeForm(forms.ModelForm):
         if commit:
             user.save()
         return user
-
-

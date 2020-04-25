@@ -5,6 +5,7 @@ import urllib.parse
 from random import randint
 
 from django.contrib.auth import get_user_model as InstoreUser
+from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework.views import APIView
 from rest_framework import status
@@ -26,26 +27,31 @@ class RequestOTPAPIView(APIView):
         request_data = self.request.data
         serializer = RequestOTPSerializer(data=request_data)
         serializer.is_valid(raise_exception=True)
-        temp_user = InstoreUser().objects.create_user(
-            mobile_no=serializer.data['mobile_no']
-        )
+
+        validated_mobile = serializer.data['mobile_no']
+        try:
+            user = InstoreUser().objects.get(
+                mobile_no=validated_mobile, site=self.request.site
+            )
+        except ObjectDoesNotExist:
+            user = InstoreUser().objects.create_user(
+                mobile_no=validated_mobile, site=self.request.site
+            )
 
         otp = randint(1000, 9999)
         response = self.send_otp(
-            number=temp_user.mobile_no,
-            message="Your OTP is: {}".format(otp)
+            number=user.mobile_no, message="Your OTP is: {}".format(otp)
         )
         if not response['status'] == "success":
-            temp_user.delete()
             return Response({
                 "status": "failed",
-                "message": "OTP sending failed. {}".format(response['status'])},
-                status=status.HTTP_400_BAD_REQUEST)
+                "message": "OTP sending failed. {}".format(response['status'])
+            }, status=status.HTTP_400_BAD_REQUEST)
 
-        OTPData.objects.create(user=temp_user, otp=otp)
+        OTPData.objects.create(user=user, otp=otp)
 
         return Response({
-            "id": temp_user.username,
+            "username": user.username,
             "status": "success",
             "message": "OTP succesfully sent."
         }, status=status.HTTP_200_OK)
@@ -71,16 +77,11 @@ class TokenAPIView(APIView):
         request_data = self.request.data
         serializer = OTPSerializer(data=request_data)
         serializer.is_valid(raise_exception=True)
-        user = InstoreUser().objects.get(username=serializer.data['id'])
+        user = InstoreUser().objects.get(username=serializer.data['username'])
 
-        token, created = Token.objects.get_or_create(user=user)
-        if created:
-            store = Store.objects.get(domain_name=self.request.site.domain)
-            Customer.objects.create(user=user, store=store)
+        token, _ = Token.objects.get_or_create(user=user)
+        customer, _ = Customer.objects.get_or_create(user=user, store=user.site.store)
 
         return Response({
             "token": token.key,
-            "store": user.customer.store.domain_name,
-            "first_name": user.customer.first_name,
-            "address": user.customer.address
         }, status=status.HTTP_200_OK)

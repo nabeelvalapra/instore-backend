@@ -13,11 +13,11 @@ class RequestOTPSerializer(serializers.Serializer):
 
 
 class OTPSerializer(serializers.Serializer):
-    id = serializers.UUIDField(format='hex_verbose')
+    username = serializers.CharField()
     otp = serializers.CharField()
 
     def validate(self, validated_data):
-        user = InstoreUser().objects.get(username=validated_data['id'])
+        user = InstoreUser().objects.get(username=validated_data['username'])
         otp = user.otpdata_set.last()
         if otp.has_expired():
             raise ValidationError("OTP has expired")
