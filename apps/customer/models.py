@@ -10,6 +10,16 @@ class Customer(BaseDateModel):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
     mobile_no = models.CharField(
-        verbose_name="Mobile Number", max_length=10,  
+        verbose_name="Mobile Number",
+        max_length=10,
         validators=[validate_mobile_no]
+    )
+    first_name = models.CharField(
+        verbose_name="Your Name",
+        max_length=30,
+        default=""
+    )
+    address = models.TextField(
+        verbose_name="Address",
+        default=""
     )
