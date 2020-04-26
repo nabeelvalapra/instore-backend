@@ -4,9 +4,11 @@ from store.models import Store, Product
 
 
 class StoreSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(source='site.name')
+
     class Meta:
         model = Store
-        fields = "__all__"
+        fields = ("email", "logo", "name")
 
 
 class ProductSerializer(serializers.ModelSerializer):
