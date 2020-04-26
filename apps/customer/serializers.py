@@ -5,6 +5,8 @@ from rest_framework import serializers
 
 from base.validators import validate_mobile_no
 
+from customer.models import Purchase
+
 
 class RequestOTPSerializer(serializers.Serializer):
     mobile_no = serializers.CharField(
@@ -24,3 +26,9 @@ class OTPSerializer(serializers.Serializer):
         if not otp.password == int(validated_data["otp"]):
             raise ValidationError("Wrong OTP")
         return validated_data
+
+
+class PurchaseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Purchase
+        fields = '__all__'

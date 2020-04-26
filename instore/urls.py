@@ -23,7 +23,8 @@ from customer.viewsets import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('store/', include('store.urls')),
+    path('', include('store.urls')),
+    path('', include('customer.urls')),
     path('login-otp/', RequestOTPAPIView.as_view(), name='login_otp'),
     path('auth-token/', TokenAPIView.as_view(), name='auth_token'),
 ]

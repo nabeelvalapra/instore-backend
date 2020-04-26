@@ -8,6 +8,8 @@ from django.contrib.auth import get_user_model as InstoreUser
 from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework.views import APIView
+from rest_framework import viewsets
+from rest_framework import mixins
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
@@ -15,7 +17,7 @@ from rest_framework.authtoken.models import Token
 from instore_user.models import OneTimePassword
 
 from customer.serializers import (
-    RequestOTPSerializer, OTPSerializer
+    RequestOTPSerializer, OTPSerializer, PurchaseSerializer
 )
 from customer.models import Customer
 
@@ -83,3 +85,9 @@ class TokenAPIView(APIView):
         return Response({
             "token": token.key,
         }, status=status.HTTP_200_OK)
+
+
+class PurchaseViewSet(
+    mixins.CreateModelMixin, viewsets.GenericViewSet
+):
+    serializer_class = PurchaseSerializer
