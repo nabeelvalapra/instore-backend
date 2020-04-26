@@ -12,14 +12,12 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 
-from instore_user.models import OTPData
+from instore_user.models import OneTimePassword
 
 from customer.serializers import (
     RequestOTPSerializer, OTPSerializer
 )
 from customer.models import Customer
-
-from store.models import Store
 
 
 class RequestOTPAPIView(APIView):
@@ -38,9 +36,9 @@ class RequestOTPAPIView(APIView):
                 mobile_no=validated_mobile, site=self.request.site
             )
 
-        otp = randint(1000, 9999)
+        password = randint(1000, 9999)
         response = self.send_otp(
-            number=user.mobile_no, message="Your OTP is: {}".format(otp)
+            number=user.mobile_no, message="Your OTP is: {}".format(password)
         )
         if not response['status'] == "success":
             return Response({
@@ -48,7 +46,7 @@ class RequestOTPAPIView(APIView):
                 "message": "OTP sending failed. {}".format(response['status'])
             }, status=status.HTTP_400_BAD_REQUEST)
 
-        OTPData.objects.create(user=user, otp=otp)
+        OneTimePassword.objects.create(user=user, password=password)
 
         return Response({
             "username": user.username,

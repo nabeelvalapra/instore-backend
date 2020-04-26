@@ -3,7 +3,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.sites.models import Site
 
-from instore_user.models import InstoreUser, OTPData
+from instore_user.models import InstoreUser, OneTimePassword
 from instore_user.forms import UserChangeForm, UserCreationForm
 
 from rest_framework.authtoken.admin import TokenAdmin
@@ -49,9 +49,9 @@ admin.site.register(InstoreUser, InstoreUserAdmin)
 admin.site.unregister(Group)
 
 # Register OTPData
-@admin.register(OTPData)
+@admin.register(OneTimePassword)
 class OTPAdmin(admin.ModelAdmin):
-    list_display = ('user', 'otp')
+    list_display = ('user', 'password')
 
 
 # Now register the new Customized Admin Site.

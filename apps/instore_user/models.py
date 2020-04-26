@@ -59,13 +59,13 @@ class InstoreUser(AbstractBaseUser):
         return self.is_owner
 
 
-class OTPData(models.Model):
+class OneTimePassword(models.Model):
     user = models.ForeignKey(
         InstoreUser,
         on_delete=models.CASCADE
     )
-    otp = models.IntegerField(
-        verbose_name="OTP"
+    password = models.IntegerField(
+        verbose_name="Password"
     )
     created_at = models.DateTimeField(
         auto_now_add=True

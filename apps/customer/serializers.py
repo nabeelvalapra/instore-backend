@@ -18,9 +18,9 @@ class OTPSerializer(serializers.Serializer):
 
     def validate(self, validated_data):
         user = InstoreUser().objects.get(username=validated_data['username'])
-        otp = user.otpdata_set.last()
+        otp = user.onetimepassword_set.last()
         if otp.has_expired():
             raise ValidationError("OTP has expired")
-        if not otp.otp == int(validated_data["otp"]):
+        if not otp.password == int(validated_data["otp"]):
             raise ValidationError("Wrong OTP")
         return validated_data

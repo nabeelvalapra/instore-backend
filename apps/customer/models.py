@@ -9,9 +9,11 @@ class Customer(BaseDateModel):
     first_name = models.CharField(
         verbose_name="Your Name",
         max_length=30,
-        default=""
+        default=None,
+        null=True, blank=True
     )
-    address = models.TextField(
-        verbose_name="Address",
-        default=""
+    email = models.EmailField(
+        verbose_name="Email Address",
+        default=None,
+        null=True, blank=True
     )
