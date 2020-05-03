@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import Store from './Store';
 import { fetchStoreDetails } from './duck/actions';
 import { fetchProducts } from '../product/duck/actions';
-import Products from './Product';
+import Store from './components/Store';
+import Products from './components/Product';
 
 class HomeContainer extends Component{
 
@@ -48,7 +48,7 @@ const mapStateToProps = state => {
   const productsIsFetching = state.product.isFetching;
   const productsError = state.product.error;
 
-  return { storeIsFetching, store, storeError, productsIsFetching, products, productsError} 
+  return { storeIsFetching, store, storeError, productsIsFetching, products, productsError}
 };
 
 const mapDispatchToProps = dispatch => {
