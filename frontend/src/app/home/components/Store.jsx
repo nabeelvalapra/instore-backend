@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 
+import Header from './Header';
+import Spotlight from './Spotlight'
+
 class Store extends Component {
   render() {
-    return
+    return(
+      <div>
+        <Header />
+        <Spotlight />
+      </div>
+    )
     // return (
     //     <div>
     //       <br></br>
