@@ -3,13 +3,20 @@ import PropTypes from 'prop-types'
 
 import Header from './Header';
 import Spotlight from './Spotlight'
+import { CategoryToggle, ProductList } from './ProductTab'
 
 class Store extends Component {
   render() {
     return(
       <div>
-        <Header />
-        <Spotlight />
+        <section className="wrapp">
+          <section id="content">
+            <Header />
+            <Spotlight />
+            <CategoryToggle />
+            <ProductList />
+          </section>
+        </section>
       </div>
     )
     // return (
