@@ -138,11 +138,19 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+SITE_ID = "1"
+
 ALLOWED_HOSTS = [
-    "localhost",
-    "google.com",
+    "192.168.1.4",
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000",
-]
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_WHITELIST = [
+#     "https://192.168.1.4:8000",
+#     "http://localhost:3000",
+#     "https://cca5c897.ngrok.io",
+# ]
+
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+SECURE_SSL_REDIRECT = False

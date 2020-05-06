@@ -27,7 +27,7 @@ export function fetchStoreDetailFailed(errorMsg) {
 export function fetchStoreDetails() {
     return function(dispatch) {
         dispatch(fetchStoreDetailRequest())
-        return fetch(`${APIURL}/store/`)
+        return fetch(`${APIURL}/`)
             .then(
                 response => response.json(),
             )

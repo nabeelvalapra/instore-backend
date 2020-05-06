@@ -28,8 +28,8 @@ export function fetchProducts(productId=null) {
   return function(dispatch) {
     dispatch(fetchProductsRequest())
     let endpoint = (productId
-      ? `${APIURL}/store/products/${productId}/`
-      : `${APIURL}/store/products/`
+      ? `${APIURL}/products/${productId}/`
+      : `${APIURL}/products/`
     )
     return fetch(endpoint)
       .then(
