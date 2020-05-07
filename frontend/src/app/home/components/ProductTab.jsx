@@ -3,8 +3,6 @@ import React, { Component } from "react";
 import '../../../assets/css/style.css'
 import '../../../assets/css/bootstrap.min.css'
 
-import shirt1 from '../../../assets/images/products/shirt.png'
-
 
 export class CategoryToggle extends Component{
     render() {
@@ -33,23 +31,24 @@ export class CategoryToggle extends Component{
 
 export class Product extends Component {
   render() {
+    const product = this.props.product;
     return (
       <div className="product col-xs-6">
         <div className="img_cover">
           <a href="single.html">
-            <img src={ shirt1 } alt="" />
+            <img src={ product.product_images[0] } alt="" />
           </a>
           <span className="add_w_list" />
         </div>
         <div className="head row">
           <div className="col-xs-7">
             <a href="single.html" className="title">
-              John Players
+              { product.name }
             </a>
           </div>
           <div className="col-xs-5">
             <span className="price">
-              $220
+              Rs { product.price }
             </span>
           </div>
           <div className="clearfix" />
@@ -61,15 +60,17 @@ export class Product extends Component {
 
 
 export class ProductList extends Component{
+
   render() {
+    const products = Object.values(this.props.products);
     return (
       <div className="tab-content">
         <div id="popular" className="products_list">
           <div className="container p0">
             <div className="row">
-              <Product />
-              <Product />
-              <Product />
+              {products.map((product, index) => {
+                return <Product product={product} />
+              })}
             </div>
           </div>
         </div>

@@ -22,7 +22,8 @@ class ProductSerializer(serializers.ModelSerializer):
         ]
 
     def get_product_images(self, product):
+        request = self.context.get('request')
         product_image = {}
-        for item in product.product_images.values("order", "image"):
-            product_image[item["order"]] = item["image"]
+        for item in product.product_images.all():
+            product_image[item.order] = request.build_absolute_uri(item.image.url)
         return product_image

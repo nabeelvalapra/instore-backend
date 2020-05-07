@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { fetchStoreDetails } from './duck/actions';
 import { fetchProducts } from '../product/duck/actions';
-import Store from './components/Store';
-import Products from './components/Product';
+
+import Header from './components/Header';
+import Spotlight from './components/Spotlight'
+import { CategoryToggle, ProductList } from './components/ProductTab'
 
 class HomeContainer extends Component{
 
@@ -21,21 +23,38 @@ class HomeContainer extends Component{
     } = this.props
 
     return (
-      <div>
-        <Store/>
-        {(!storeIsFetching && store)
-          ? <Store store={store}/>
-          : ((!storeIsFetching && storeError)
-              ? <p> { storeError } </p>
-              : <p> Fetching store details...</p>)
-        }
-        {(!productsIsFetching && products)
-          ? <Products products={products}/>
-          : ((!productsIsFetching && productsError))
-              ? <p> { productsError } </p>
-              : <p> Fetching product details ...</p>
-        }
-      </div>
+      <>
+        <section className="wrapp">
+          <div className="right_content">
+            {(!storeIsFetching && store)
+              ? (
+                <Header />
+              )
+              : (
+                (!storeIsFetching && storeError)
+                  ? <p> { storeError } </p>
+                  : <p> Fetching store details...</p>
+              )
+            }
+
+            {(!productsIsFetching && products)
+              ? (
+		 	          <section id="content">
+                  <Spotlight />
+                  <CategoryToggle />
+                  <ProductList products={products} />
+                </section>
+              )
+              : (
+                (!productsIsFetching && productsError)
+                  ? <p> { productsError } </p>
+                  : <p> Fetching product details ...</p>
+              )
+            }
+
+          </div>
+        </section>
+      </>
     )
   }
 }
