@@ -11,7 +11,7 @@ import shirt3 from '../../../assets/images/products/shirt-3.png'
 class Spotlight extends Component{
     render() {
         return (
-          <div>
+          <>
             <div className="container">
               <div className="search">
                 <input type="text" placeholder="What are you looking for?" />
@@ -37,7 +37,7 @@ class Spotlight extends Component{
                 </div>
               </div>
             </div>
-          </div>
+          </>
         )
     }
 }

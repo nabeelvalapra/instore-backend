@@ -10,12 +10,14 @@ import ProductContainer from './product/ProductContainer';
 class App extends Component {
   render() {
     return (
-      <ConnectedRouter history={this.props.history}>
-        <Switch>
-          <Route exact path='/' component={HomeContainer} />
-          <Route path='/product/:productSlug/' component={requireAuth(ProductContainer)}/>
-        </Switch>
-      </ConnectedRouter>
+      <React.Fragment>
+        <ConnectedRouter history={this.props.history}>
+          <Switch>
+            <Route exact path='/' component={HomeContainer} />
+            <Route path='/product/:productSlug/' component={requireAuth(ProductContainer)}/>
+          </Switch>
+        </ConnectedRouter>
+      </React.Fragment>
     );
   }
 }

@@ -22,6 +22,7 @@ class HomeContainer extends Component{
 
     return (
       <div>
+        <Store/>
         {(!storeIsFetching && store)
           ? <Store store={store}/>
           : ((!storeIsFetching && storeError)

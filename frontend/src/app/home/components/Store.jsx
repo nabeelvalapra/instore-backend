@@ -8,16 +8,18 @@ import { CategoryToggle, ProductList } from './ProductTab'
 class Store extends Component {
   render() {
     return(
-      <div>
+      <>
         <section className="wrapp">
-          <section id="content">
+          <div className="right_content">
             <Header />
-            <Spotlight />
-            <CategoryToggle />
-            <ProductList />
-          </section>
+		 	      <section id="content">
+              <Spotlight />
+              <CategoryToggle />
+              <ProductList />
+            </section>
+          </div>
         </section>
-      </div>
+      </>
     )
     // return (
     //     <div>

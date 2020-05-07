@@ -4,7 +4,6 @@ import '../../../assets/css/style.css'
 import '../../../assets/css/bootstrap.min.css'
 
 import shirt1 from '../../../assets/images/products/shirt.png'
-import banner from '../../../assets/images/add.jpg'
 
 
 export class CategoryToggle extends Component{
@@ -31,6 +30,36 @@ export class CategoryToggle extends Component{
     }
 }
 
+
+export class Product extends Component {
+  render() {
+    return (
+      <div className="product col-xs-6">
+        <div className="img_cover">
+          <a href="single.html">
+            <img src={ shirt1 } alt="" />
+          </a>
+          <span className="add_w_list" />
+        </div>
+        <div className="head row">
+          <div className="col-xs-7">
+            <a href="single.html" className="title">
+              John Players
+            </a>
+          </div>
+          <div className="col-xs-5">
+            <span className="price">
+              $220
+            </span>
+          </div>
+          <div className="clearfix" />
+        </div>
+      </div>
+    )
+  }
+}
+
+
 export class ProductList extends Component{
   render() {
     return (
@@ -38,106 +67,10 @@ export class ProductList extends Component{
         <div id="popular" className="products_list">
           <div className="container p0">
             <div className="row">
-
-              <div className="product col-xs-6">
-                <div className="img_cover">
-                  <a href="single.html">
-                    <img src={ shirt1 } alt="" />
-                  </a>
-                  <span className="add_w_list" />
-                </div>
-                <div className="head row">
-                  <div className="col-xs-7">
-                    <a href="single.html" className="title">
-                      John Players
-                    </a>
-                  </div>
-                  <div className="col-xs-5">
-                    <span className="price">
-                      $220
-                    </span>
-                  </div>
-                  <div className="clearfix" />
-                </div>
-              </div>
-
-              <div className="product col-xs-6">
-                <div className="img_cover">
-                  <a href="single.html">
-                    <img src={ shirt1 } alt="" />
-                  </a>
-                  <span className="add_w_list" />
-                </div>
-                <div className="head row">
-                  <div className="col-xs-7">
-                    <a href="single.html" className="title">
-                      John Players
-                    </a>
-                  </div>
-                  <div className="col-xs-5">
-                    <span className="price">
-                      $220
-                    </span>
-                  </div>
-                  <div className="clearfix" />
-                </div>
-              </div>
-
-              <div className="product col-xs-6">
-                <div className="img_cover">
-                  <a href="single.html">
-                    <img src={ shirt1 } alt="" />
-                  </a>
-                  <span className="add_w_list" />
-                </div>
-                <div className="head row">
-                  <div className="col-xs-7">
-                    <a href="single.html" className="title">
-                      John Players
-                    </a>
-                  </div>
-                  <div className="col-xs-5">
-                    <span className="price">
-                      $220
-                    </span>
-                  </div>
-                  <div className="clearfix" />
-                </div>
-              </div>
-
-              <div className="product col-xs-6">
-                <div className="img_cover">
-                  <a href="single.html">
-                    <img src={ shirt1 } alt="" />
-                  </a>
-                  <span className="add_w_list" />
-                </div>
-                <div className="head row">
-                  <div className="col-xs-7">
-                    <a href="single.html" className="title">
-                      John Players
-                    </a>
-                  </div>
-                  <div className="col-xs-5">
-                    <span className="price">
-                      $220
-                    </span>
-                  </div>
-                  <div className="clearfix" />
-                </div>
-              </div>
+              <Product />
+              <Product />
+              <Product />
             </div>
-
-            <div className="add">
-              <div className="container">
-                <div className="row">
-                  <a href="/">
-                    <img src={ banner } alt="add" />
-                  </a>
-                </div>
-              </div>
-            </div>
-
           </div>
         </div>
       </div>

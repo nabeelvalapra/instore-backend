@@ -34,7 +34,7 @@ a:hover{
 }
 
 .container {
-	width: 90%;
+	width: 98%;
 	max-width: 100%;
 }
 
@@ -542,7 +542,7 @@ header .brand-name img {
 	margin-top: 0;
 }
 .cart_table .item {
-	padding: 15px; 
+	padding: 15px;
 	overflow: hidden;
 }
 .quatity_change {
