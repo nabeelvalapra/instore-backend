@@ -33,16 +33,6 @@ class Spotlight(BaseDateModel):
     )
 
 
-class Category(BaseDateModel):
-    name = models.CharField(
-        verbose_name=_("Categroy Name"),
-        max_length=15
-    )
-
-    def __str__(self):
-        return self.name
-
-
 class Tag(BaseDateModel):
     name = models.CharField(
         verbose_name=_("Tag Name"),
@@ -76,11 +66,6 @@ class Product(BaseDateModel):
         verbose_name=_("Product Description"),
         null=True, blank=True
     )
-    category = models.ForeignKey(
-        Category,
-        on_delete=models.CASCADE,
-        null=True, blank=True
-    )
     tag = models.ForeignKey(
         Tag,
         on_delete=models.CASCADE,
@@ -108,4 +93,3 @@ class ProductImage(BaseDateModel):
         verbose_name=_("Product Images"),
         upload_to="store/product/images"
     )
-

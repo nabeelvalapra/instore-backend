@@ -23,7 +23,7 @@ export const store = (state=initialState, action) => {
             "logo": json.logo
           }
       })
-    
+
       case types.FETCH_STORE_DETAIL_FAILED:
         return Object.assign({}, state, {
           isFetching: false,
@@ -32,5 +32,13 @@ export const store = (state=initialState, action) => {
 
     default:
       return state
+  }
+}
+
+export const tagFilter = (state = "popular", action) => {
+  if(action.tag){
+    return action.tag
+  }else{
+    return state
   }
 }

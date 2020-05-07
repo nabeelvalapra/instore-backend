@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { fetchStoreDetails } from './duck/actions';
+import { fetchStoreDetails, setTagFilter } from './duck/actions';
 import { fetchProducts } from '../product/duck/actions';
 
 import Header from './components/Header';
 import Spotlight from './components/Spotlight'
-import { CategoryToggle, ProductList } from './components/ProductTab'
+import { TagFilter, ProductList } from './components/ProductTab'
 
 class HomeContainer extends Component{
 
@@ -19,7 +19,7 @@ class HomeContainer extends Component{
   render() {
     const {
       storeIsFetching, store, storeError,
-      productsIsFetching, products, productsError
+      productsIsFetching, products, productsError, setTagFilter
     } = this.props
 
     return (
@@ -41,7 +41,7 @@ class HomeContainer extends Component{
               ? (
 		 	          <section id="content">
                   <Spotlight />
-                  <CategoryToggle />
+                  <TagFilter setTagFilter={setTagFilter}/>
                   <ProductList products={products} />
                 </section>
               )
@@ -68,13 +68,17 @@ const mapStateToProps = state => {
   const productsIsFetching = state.product.isFetching;
   const productsError = state.product.error;
 
-  return { storeIsFetching, store, storeError, productsIsFetching, products, productsError}
+  return {
+    storeIsFetching, store, storeError,
+    productsIsFetching, products, productsError
+  }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchStoreDetails: () => dispatch(fetchStoreDetails()),
-    fetchProducts: () => dispatch(fetchProducts())
+    fetchProducts: () => dispatch(fetchProducts()),
+    setTagFilter: (tag) => dispatch(setTagFilter(tag))
   }
 };
 

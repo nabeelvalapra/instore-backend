@@ -24,6 +24,13 @@ export function fetchStoreDetailFailed(errorMsg) {
   }
 }
 
+export function setTagFilter(tag) {
+  return {
+    type: types.SET_TAG_FILTER,
+    tag
+  }
+}
+
 export function fetchStoreDetails() {
     return function(dispatch) {
         dispatch(fetchStoreDetailRequest())

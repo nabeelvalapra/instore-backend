@@ -1,31 +1,45 @@
 import React, { Component } from "react";
 
-import '../../../assets/css/style.css'
-import '../../../assets/css/bootstrap.min.css'
+import '../../../assets/css/style.css';
+import '../../../assets/css/bootstrap.min.css';
+
+import types from '../duck/types';
 
 
-export class CategoryToggle extends Component{
-    render() {
-      return(
-        <div className="tab_toggle">
-          <div className="container p0">
-            <div className="row">
-              <ul className="buttons">
-                <li className="col-xs-4 active bt">
-                  <a className="button" href="#popular">Popular</a>
-                </li>
-                <li className="col-xs-4 bt">
-                  <a className="button" href="#new">New</a>
-                </li>
-                <li className="col-xs-4 bt">
-                  <a className="button" href="#deals">Deals</a>
-                </li>
-              </ul>
-            </div>
+export class TagFilter extends Component{
+  render() {
+    return(
+      <div className="tab_toggle">
+        <div className="container p0">
+          <div className="row">
+            <ul className="buttons">
+              <li className="col-xs-4 active bt">
+                <a className="button" href="/"
+                  onClick={e => {
+                    e.preventDefault()
+                    this.props.setTagFilter(types.TAG_POPULAR)
+                  }}>Popular</a>
+              </li>
+              <li className="col-xs-4 bt">
+                <a className="button" href="/"
+                  onClick={e => {
+                    e.preventDefault()
+                    this.props.setTagFilter(types.TAG_NEW_ARRIVAL)
+                  }}>New</a>
+              </li>
+              <li className="col-xs-4 bt">
+                <a className="button" href="/"
+                  onClick={e => {
+                    e.preventDefault()
+                    this.props.setTagFilter(types.TAG_DEALS)
+                  }}>Deals</a>
+              </li>
+            </ul>
           </div>
         </div>
-      )
-    }
+      </div>
+    )
+  }
 }
 
 
@@ -60,7 +74,6 @@ export class Product extends Component {
 
 
 export class ProductList extends Component{
-
   render() {
     const products = Object.values(this.props.products);
     return (
@@ -68,9 +81,9 @@ export class ProductList extends Component{
         <div id="popular" className="products_list">
           <div className="container p0">
             <div className="row">
-              {products.map((product, index) => {
-                return <Product product={product} />
-              })}
+              {products.map((product) => {
+                return <Product key={product.id} product={product} />
+               })}
             </div>
           </div>
         </div>

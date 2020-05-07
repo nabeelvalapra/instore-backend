@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import Header from './Header';
 import Spotlight from './Spotlight'
-import { CategoryToggle, ProductList } from './ProductTab'
+import { TagToggle, ProductList } from './ProductTab'
 
 class Store extends Component {
   render() {
@@ -14,7 +14,7 @@ class Store extends Component {
             <Header />
 		 	      <section id="content">
               <Spotlight />
-              <CategoryToggle />
+              <TagToggle />
               <ProductList />
             </section>
           </div>

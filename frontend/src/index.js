@@ -12,7 +12,7 @@ import App from './app/App';
 
 import { combineReducers } from 'redux'
 import { auth } from './app/common/reducers/auth'
-import { store as homeStore} from './app/home/duck/reducers'
+import { store as homeStore, tagFilter } from './app/home/duck/reducers'
 import { product } from './app/product/duck/reducers'
 import { connectRouter } from 'connected-react-router'
 
@@ -21,7 +21,7 @@ const loggerMiddleware = createLogger()
 const history = createBrowserHistory()
 
 const rootReducer = combineReducers(
-  {auth, product, store: homeStore, router: connectRouter(history)}
+  {auth, product, tagFilter, store: homeStore, router: connectRouter(history)}
 )
 
 const store = createStore(
