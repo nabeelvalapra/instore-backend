@@ -12,12 +12,6 @@ class Spotlight extends Component{
     render() {
         return (
           <>
-            <div className="container">
-              <div className="search">
-                <input type="text" placeholder="What are you looking for?" />
-                <input type="submit" />
-              </div>
-            </div>
             <div className="banner_slider">
               <div className="slider_wrap">
                 <div className="col">

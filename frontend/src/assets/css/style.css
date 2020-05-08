@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
 body {
 	font-family: 'Poppins', sans-serif;
 	background: #ccc;
@@ -34,7 +36,7 @@ a:hover{
 }
 
 .container {
-	width: 98%;
+	width: 90%;
 	max-width: 100%;
 }
 
@@ -219,6 +221,7 @@ header .brand-name img {
 	width: 100%;
 	height: auto;
 	margin: 0 auto;
+	padding-top: 20px;
 }
 .inner_banner .col img {
 	border-radius: 50%;
@@ -472,7 +475,7 @@ header .brand-name img {
 }
 .cart_section .price{
 	font-weight: 700;
-	font-size: 36px;
+	font-size: 25px;
 	display: block;
 	text-align: right;
 }

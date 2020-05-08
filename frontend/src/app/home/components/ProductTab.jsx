@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import types from '../duck/types';
 
 import '../../../assets/css/style.css';
-import '../../../assets/css/bootstrap.min.css';
+// import '../../../assets/css/bootstrap.min.css';
 
 
 export class TagFilter extends Component{
@@ -57,13 +57,13 @@ export class Product extends Component {
         </div>
         <div className="head row">
           <div className="col-xs-7">
-            <a href="single.html" className="title">
+            <Link to={`/product/${product.slug}/`} className="title">
               { product.name }
-            </a>
+            </Link>
           </div>
           <div className="col-xs-5">
             <span className="price">
-              Rs { product.price }
+              ₹ { product.price }
             </span>
           </div>
           <div className="clearfix" />

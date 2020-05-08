@@ -7,8 +7,8 @@ import Header from './components/Header';
 import Spotlight from './components/Spotlight'
 import { TagFilter, ProductList } from './components/ProductTab'
 
-class HomeContainer extends Component{
 
+class HomeContainer extends Component{
   componentDidMount() {
     if(!this.props.storeIsFetching && !this.props.store){
       this.props.fetchStoreDetails()

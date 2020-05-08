@@ -14,9 +14,7 @@ class ProductContainer extends Component{
 
     render() {
       const { productSlug, productIsFetching, products } = this.props
-      const product = (products
-                       ? products[productSlug]
-                       : null)
+      const product = (products ? products[productSlug] : null)
 
       return (
         <div>
