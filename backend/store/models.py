@@ -57,6 +57,10 @@ class Product(BaseDateModel):
         verbose_name=_("Product Name"),
         max_length=40
     )
+    slug = models.SlugField(
+        verbose_name=_("Slug"),
+        null=True, blank=True
+    )
     description = models.TextField(
         verbose_name=_("Product Description"),
         null=True, blank=True
@@ -76,6 +80,11 @@ class Product(BaseDateModel):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        unique_together = (
+            'store', 'slug'
+        )
 
 
 class ProductImage(BaseDateModel):

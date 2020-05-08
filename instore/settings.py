@@ -5,7 +5,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Adds our apps to pythonpath, this way we don't need to type our project
 # name in our dotted import paths:
-os.sys.path.append(os.path.join(BASE_DIR, 'apps'))
+os.sys.path.append(os.path.join(BASE_DIR, 'backend'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/

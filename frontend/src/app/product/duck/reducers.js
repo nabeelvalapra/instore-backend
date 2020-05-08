@@ -15,7 +15,7 @@ export const product = (state = initialState, action) => {
 
       case types.FETCH_PRODUCTS_SUCCESS:
         const newProducts = action.json.reduce(function(result, item) {
-          result[item.id] = item;
+          result[item.slug] = item;
           return result;
         }, {})
         const newItems = (

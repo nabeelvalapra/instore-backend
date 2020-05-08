@@ -13,7 +13,7 @@ class Products extends Component{
             <br/>
             Product ID: { product.id }
             <br/>
-            Product URL: <Link to={`/product/${product.id}/`}>link</Link>
+            Product URL: <Link to={`/product/${product.slug}/`}>link</Link>
             <br/>
             Product Name: { product.name }
             <br/>
@@ -23,7 +23,7 @@ class Products extends Component{
             <br/>
             - Product Image 2: { product.product_images["2"] }
           </div>
-        ))} 
+        ))}
       </div>
     )
   }
