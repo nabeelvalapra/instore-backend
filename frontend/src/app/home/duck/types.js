@@ -5,7 +5,7 @@ const FETCH_STORE_DETAIL_FAILED = 'FETCH_STORE_DETAIL_FAILED';
 const SET_TAG_FILTER = 'SET_TAG_FILTER';
 const TAG_POPULAR = 'popular'
 const TAG_DEALS = 'deals'
-const TAG_NEW_ARRIVAL = 'new-arrival'
+const TAG_NEW_ARRIVAL = 'new_arrivals'
 
 export default {
     FETCH_STORE_DETAIL_REQUEST,

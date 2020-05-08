@@ -33,22 +33,17 @@ class Spotlight(BaseDateModel):
     )
 
 
-class Tag(BaseDateModel):
-    name = models.CharField(
-        verbose_name=_("Tag Name"),
-        max_length=25
-    )
-
-    def __str__(self):
-        return self.name
-
-
 class Product(BaseDateModel):
 
     class AvailabilityChoices(models.TextChoices):
         OUT_OF_STOCK = 0, _("Out of Stock")
         AVAILABLE = 1, _("Available")
         FAST_MOVING = 2, _("Fast Moving")
+
+    class TagChoices(models.TextChoices):
+        POPULAR = "popular", _("Popular")
+        NEW_ARRIVALS = "new_arrivals", _("New Arrivals")
+        DEALS = "deals", _("Deals")
 
     store = models.ForeignKey(
         Store,
@@ -66,10 +61,11 @@ class Product(BaseDateModel):
         verbose_name=_("Product Description"),
         null=True, blank=True
     )
-    tag = models.ForeignKey(
-        Tag,
-        on_delete=models.CASCADE,
-        null=True, blank=True
+    tag = models.CharField(
+        verbose_name=_("Tag"),
+        max_length=15,
+        choices=TagChoices.choices,
+        default=TagChoices.POPULAR
     )
     availability = models.CharField(
         verbose_name=_("Availability Status"),

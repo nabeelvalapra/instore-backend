@@ -19,7 +19,8 @@ class HomeContainer extends Component{
   render() {
     const {
       storeIsFetching, store, storeError,
-      productsIsFetching, products, productsError, setTagFilter
+      productsIsFetching, products, productsError,
+      tagFilter, setTagFilter
     } = this.props
 
     return (
@@ -42,7 +43,7 @@ class HomeContainer extends Component{
 		 	          <section id="content">
                   <Spotlight />
                   <TagFilter setTagFilter={setTagFilter}/>
-                  <ProductList products={products} />
+                  <ProductList products={products} tagFilter={tagFilter}/>
                 </section>
               )
               : (
@@ -68,9 +69,12 @@ const mapStateToProps = state => {
   const productsIsFetching = state.product.isFetching;
   const productsError = state.product.error;
 
+  const { tagFilter } = state;
+
   return {
     storeIsFetching, store, storeError,
-    productsIsFetching, products, productsError
+    productsIsFetching, products, productsError,
+    tagFilter
   }
 };
 

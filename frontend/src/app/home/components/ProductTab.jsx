@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
+
+import types from '../duck/types';
 
 import '../../../assets/css/style.css';
 import '../../../assets/css/bootstrap.min.css';
-
-import types from '../duck/types';
 
 
 export class TagFilter extends Component{
@@ -49,9 +50,9 @@ export class Product extends Component {
     return (
       <div className="product col-xs-6">
         <div className="img_cover">
-          <a href="single.html">
-            <img src={ product.product_images[0] } alt="" />
-          </a>
+          <Link to={`/product/${product.id}/`}>
+            <img src={product.product_images[0]} alt="" />
+          </Link>
           <span className="add_w_list" />
         </div>
         <div className="head row">
@@ -75,7 +76,9 @@ export class Product extends Component {
 
 export class ProductList extends Component{
   render() {
-    const products = Object.values(this.props.products);
+    const products = Object.values(this.props.products).filter(
+      prod => prod.tag === this.props.tagFilter
+    );
     return (
       <div className="tab-content">
         <div id="popular" className="products_list">
