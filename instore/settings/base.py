@@ -75,8 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'instore.wsgi.application'
 
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -125,11 +123,7 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-SITE_ID = "1"
 
-ALLOWED_HOSTS = [
-    "localhost",
-]
 
 CORS_ORIGIN_ALLOW_ALL = True
 # CORS_ORIGIN_WHITELIST = [

@@ -11,6 +11,7 @@ __pycache__/
 
 # Django settings
 local.py
+prod.py
 
 # Distribution / packaging
 .Python
