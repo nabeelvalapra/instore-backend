@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
 
 from customer.viewsets import (
     RequestOTPAPIView, TokenAPIView
@@ -27,4 +29,5 @@ urlpatterns = [
     path('', include('customer.urls')),
     path('login-otp/', RequestOTPAPIView.as_view(), name='login_otp'),
     path('auth-token/', TokenAPIView.as_view(), name='auth_token'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
