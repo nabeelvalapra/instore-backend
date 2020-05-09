@@ -29,5 +29,6 @@ urlpatterns = [
     path('', include('customer.urls')),
     path('login-otp/', RequestOTPAPIView.as_view(), name='login_otp'),
     path('auth-token/', TokenAPIView.as_view(), name='auth_token'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + \
+    static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
+    static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
