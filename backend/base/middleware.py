@@ -14,7 +14,7 @@ class CurrentSiteMiddleware(MiddlewareMixin):
         header_origin = request.headers.get('Origin', None)
         request_uri = request.get_raw_uri()
         if not header_origin:
-            if '/admin/' in request_uri and settings.REQUEST_SCHEMA in request_uri:
+            if '/admin/' in request_uri and settings.REQUEST_SCHEME in request_uri:
                 request.site = get_object_or_404(Site, id=1)
             else:
                 raise SuspiciousOperation(

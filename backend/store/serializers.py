@@ -16,7 +16,7 @@ class StoreSerializer(serializers.ModelSerializer):
     def get_logo(self, store):
         request = self.context.get('request')
         return request.build_absolute_uri(store.logo.url).\
-            replace("http://", settings.REQUEST_SCHEMA)
+            replace("http://", settings.REQUEST_SCHEME)
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -34,5 +34,5 @@ class ProductSerializer(serializers.ModelSerializer):
         product_image = {}
         for item in product.product_images.all():
             product_image[item.order] = request.build_absolute_uri(item.image.url).\
-                replace("http://", settings.REQUEST_SCHEMA)
+                replace("http://", settings.REQUEST_SCHEME)
         return product_image
