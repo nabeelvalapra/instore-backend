@@ -13,10 +13,11 @@ class CurrentSiteMiddleware(MiddlewareMixin):
     def process_request(self, request):
         header_origin = request.headers.get('Origin', None)
         request_uri = request.get_raw_uri()
-        if all(key in request_uri for key in ['/admin/', settings.REQUEST_SCHEMA]):
-            request.site = get_object_or_404(Site, id=1)
-        elif not header_origin:
-            raise SuspiciousOperation("Missing Origin Header in Request")
+        if not header_origin:
+            if '/admin/' in request_uri and settings.REQUEST_SCHEMA in request_uri:
+                request.site = get_object_or_404(Site, id=1)
+            else:
+                raise SuspiciousOperation("Missing Origin Header in Request")
         else:
             header_origin = header_origin.replace(settings.REQUEST_SCHEMA, "")
             request.site = get_object_or_404(Site, domain__exact=header_origin)
