@@ -22,4 +22,4 @@ class CurrentSiteMiddleware(MiddlewareMixin):
                 )
         else:
             header_origin = header_origin.replace(settings.REQUEST_SCHEME, "")
-            request.site = Site.objects.get(domain__exact=header_origin)
+            request.site = get_object_or_404(Site, domain__exact=header_origin)
