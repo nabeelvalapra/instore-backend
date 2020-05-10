@@ -33,6 +33,7 @@ INSTALLED_APPS = [
 
     'django_extensions',
     'corsheaders',
+    'base',
 
     'instore_user',
     'rest_framework',
@@ -47,7 +48,7 @@ AUTH_USER_MODEL = 'instore_user.InstoreUser'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.sites.middleware.CurrentSiteMiddleware',
+    'base.middleware.CurrentSiteMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
