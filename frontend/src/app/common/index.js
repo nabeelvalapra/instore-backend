@@ -1,1 +1,1 @@
-export const APIURL = "http://api.hash37.marketing";
+export const APIURL = "https://api.hash37.marketing";
