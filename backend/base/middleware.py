@@ -18,4 +18,5 @@ class CurrentSiteMiddleware(MiddlewareMixin):
         elif not header_origin:
             raise SuspiciousOperation("Missing Origin Header in Request")
         else:
+            header_origin = header_origin.replace(settings.REQUEST_SCHEMA, "")
             request.site = get_object_or_404(Site, domain__exact=header_origin)
