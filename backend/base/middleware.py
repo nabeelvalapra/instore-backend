@@ -21,5 +21,5 @@ class CurrentSiteMiddleware(MiddlewareMixin):
                     "Missing Origin Header in Request - {}".format(request_uri)
                 )
         else:
-            header_origin = header_origin.replace(settings.REQUEST_SCHEMA, "")
+            header_origin = header_origin.replace(settings.REQUEST_SCHEME, "")
             request.site = Site.objects.get(domain__exact=header_origin)
