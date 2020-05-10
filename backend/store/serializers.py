@@ -8,7 +8,7 @@ class StoreSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Store
-        fields = ("email", "logo", "name")
+        fields = ("email", "logo", "name", "background_color", "button_color")
 
 
 class ProductSerializer(serializers.ModelSerializer):

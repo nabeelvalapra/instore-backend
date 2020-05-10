@@ -14,6 +14,14 @@ class Store(BaseDateModel):
     logo = models.ImageField(
         upload_to="store/logo"
     )
+    background_color = models.CharField(
+        verbose_name=_("Background Color"),
+        max_length=7
+    )
+    button_color = models.CharField(
+        verbose_name=_("Button Color"),
+        max_length=7
+    )
 
     def __str__(self):
         return self.site.name
