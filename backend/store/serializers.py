@@ -1,3 +1,5 @@
+from django.conf import settings
+
 from rest_framework import serializers
 
 from store.models import Store, Product
@@ -5,10 +7,16 @@ from store.models import Store, Product
 
 class StoreSerializer(serializers.ModelSerializer):
     name = serializers.CharField(source='site.name')
+    logo = serializers.SerializerMethodField()
 
     class Meta:
         model = Store
         fields = ("email", "logo", "name", "background_color", "button_color")
+
+    def get_logo(self, store):
+        request = self.context.get('request')
+        return request.build_absolute_uri(store.logo.url).\
+            replace("http://", settings.REQUEST_SCHEMA)
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -26,5 +34,5 @@ class ProductSerializer(serializers.ModelSerializer):
         product_image = {}
         for item in product.product_images.all():
             product_image[item.order] = request.build_absolute_uri(item.image.url).\
-                replace("http:", "https:")
+                replace("http://", settings.REQUEST_SCHEMA)
         return product_image
