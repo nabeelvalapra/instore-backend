@@ -17,7 +17,9 @@ class CurrentSiteMiddleware(MiddlewareMixin):
             if '/admin/' in request_uri and settings.REQUEST_SCHEMA in request_uri:
                 request.site = get_object_or_404(Site, id=1)
             else:
-                raise SuspiciousOperation("Missing Origin Header in Request")
+                raise SuspiciousOperation(
+                    "Missing Origin Header in Request - {}".format(request_uri)
+                )
         else:
             header_origin = header_origin.replace(settings.REQUEST_SCHEMA, "")
-            request.site = get_object_or_404(Site, domain__exact=header_origin)
+            request.site = Site.objects.get(domain__exact=header_origin)
