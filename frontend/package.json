@@ -22,7 +22,8 @@
     "redux-thunk": "^2.3.0",
     "seamless-immutable": "^7.1.4",
     "serve": "^11.3.0",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "webfontloader": "^1.6.28"
   },
   "scripts": {
     "start": "react-scripts start",

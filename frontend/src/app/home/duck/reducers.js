@@ -20,7 +20,9 @@ export const store = (state=initialState, action) => {
           isFetching: false,
           store: {
             "name": json.name,
-            "logo": json.logo
+            "logo": json.logo,
+            "backgroundColor": json.background_color,
+            "buttonColor": json.button_color
           }
       })
 

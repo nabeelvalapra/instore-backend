@@ -29,7 +29,9 @@ class HomeContainer extends Component{
           <div className="right_content">
             {(!storeIsFetching && store)
               ? (
-                <Header />
+                <Header
+                  backgroundColor={store.backgroundColor}
+                />
               )
               : (
                 (!storeIsFetching && storeError)
@@ -38,11 +40,15 @@ class HomeContainer extends Component{
               )
             }
 
-            {(!productsIsFetching && products)
+            {(!productsIsFetching && products && store)
               ? (
 		 	          <section id="content">
                   <Spotlight />
-                  <TagFilter setTagFilter={setTagFilter}/>
+                  <TagFilter
+                    setTagFilter={setTagFilter}
+                    buttonColor={store.buttonColor}
+                    activeTag={tagFilter}
+                  />
                   <ProductList products={products} tagFilter={tagFilter}/>
                 </section>
               )

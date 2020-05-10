@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import '../../assets/css/bootstrap.min.css'
+import '../../assets/css/style.css'
+
 
 class ProductDetail extends Component{
     render() {
       let { product } = this.props
       return (
         <>
-	        <section class="wrapp">
-	 	        <div class="right_content">
+	        <section className="wrapp">
+	 	        <div className="right_content">
               <section id="content">
                 <div id="spotlight">
                   <div className="top">
@@ -43,7 +46,7 @@ class ProductDetail extends Component{
                     <div className="cart_section">
                       <div className="row">
                         <div className="col-xs-7">
-                          <form action>
+                          {/* <form action> */}
                             <span className="quatity_change">
                               <span className="minus">-</span>
                               <input
@@ -54,10 +57,10 @@ class ProductDetail extends Component{
                               />
                               <span className="add">+</span>
                             </span>
-                          </form>
+                          {/* </form> */}
                         </div>
                         <div className="col-xs-4">
-                          <span className="price">₹ {product.price}</span>
+                          <span className="price">Rs {product.price}</span>
                         </div>
                       </div>
                       <div className="buttons row">
@@ -66,16 +69,17 @@ class ProductDetail extends Component{
                             <span className="wishlist_link" />
                           </Link>
                         </div>
-                        <div className="col-xs-8">
+                        {/* <div className="col-xs-8">
                           <a href className="button3">
                             Add to Cart
                           </a>
                         </div>
+                        */}
                       </div>
                     </div>
                   </div>
                 </div>
-              </section>;
+              </section>
             </div>
           </section>
         </>

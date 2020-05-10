@@ -250,8 +250,8 @@ header .brand-name img {
 	text-decoration: none;
 }
 
-.button:hover, .button:focus, .buttons li.active .button {
-	background: #e17658;
+/*.button:hover, */ .button:focus, .buttons li.active .button {
+	/*background: #e17658;*/
 	color: #fff;
 	text-decoration: none !important;
 	outline: none;

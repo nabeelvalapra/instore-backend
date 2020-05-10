@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import '../../../assets/css/style.css'
 import '../../../assets/css/bootstrap.min.css'
+import '../../../assets/css/style.css'
 
 import shirt1 from '../../../assets/images/products/shirt.png'
 import shirt2 from '../../../assets/images/products/shirt-2.png'

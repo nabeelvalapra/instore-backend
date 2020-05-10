@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types'
 
-import '../../../assets/css/style.css'
 import '../../../assets/css/bootstrap.min.css'
+import '../../../assets/css/style.css'
 
 import logo from '../../../assets/images/logo.png'
 
@@ -32,8 +33,7 @@ class Header extends Component{
     render() {
       return (
         <>
-          {/* <span className="layer" /> */}
-          <header>
+          <header style={{background: this.props.backgroundColor}}>
             <div className="container">
               <button id="menu_toggle">
                 <i className="first" />
@@ -54,4 +54,8 @@ class Header extends Component{
     }
 }
 
+Header.propTypes = {
+  backgroundColor: PropTypes.string.isRequired,
+  logo: PropTypes.string.isRequired
+}
 export default Header
