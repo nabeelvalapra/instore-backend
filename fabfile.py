@@ -14,4 +14,7 @@ def deploy_backend(c):
 
 @task(hosts=backend_host)
 def deploy_frontend(c):
+    c.run("cd instore && git reset --hard origin/master")
+    c.run("cd instore && git pull origin master")
     c.run("cd instore/frontend/ && npm run build")
+    c.run("mv instore/frontend/build /home/admin/frontend-build")
