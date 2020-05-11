@@ -8,8 +8,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'instore_production',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
+        'USER': 'instore_postgres',
+        'PASSWORD': 'postgrespass',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -22,7 +22,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = [
 ]
 
-REQUEST_SCHEMA = "https://"
+REQUEST_SCHEME = "https://"
 
 SUPERUSER_STORE_NAME = "Admin Store"
 SUPERUSER_STORE_DOMAIN = "api.hash37.marketing"
