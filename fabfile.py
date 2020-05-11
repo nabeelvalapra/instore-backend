@@ -18,4 +18,4 @@ def deploy_frontend(c):
     c.run("cd instore && git pull origin master")
     c.run("cd instore/frontend/ && npm run build")
     c.run("rm -r /home/admin/frontend-build && "
-          "mv instore/frontend/build /home/admin/frontend-build")
+          "mv /home/admin/instore/frontend/build /home/admin/frontend-build")

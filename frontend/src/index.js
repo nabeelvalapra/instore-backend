@@ -17,19 +17,19 @@ import { product } from './app/product/duck/reducers'
 import { connectRouter } from 'connected-react-router'
 
 
-const loggerMiddleware = createLogger()
 const history = createBrowserHistory()
 
 const rootReducer = combineReducers(
   {auth, product, tagFilter, store: homeStore, router: connectRouter(history)}
 )
 
-const store = createStore(
-  rootReducer,
-  applyMiddleware(
-    thunkMiddleware, loggerMiddleware, routerMiddleware(history)
-  )
-)
+let middleware = [thunkMiddleware, routerMiddleware(history)]
+if (process.env.NODE_ENV !== 'production') {
+  let loggerMiddleware = createLogger()
+  middleware = [...middleware, loggerMiddleware]
+}
+
+const store = createStore(rootReducer, applyMiddleware(...middleware))
 
 render(
   <Provider store={store}>
