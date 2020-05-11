@@ -13,7 +13,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = InstoreUser
-        fields = ('mobile_no', 'site')
+        fields = ('mobile_no', 'store')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -28,7 +28,7 @@ class UserCreationForm(forms.ModelForm):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data["password1"])
         user.username = "{}@{}".format(
-            self.cleaned_data['mobile_no'], self.cleaned_data['site']
+            self.cleaned_data['mobile_no'], self.cleaned_data['store']
         )
         if commit:
             user.save()

@@ -3,11 +3,11 @@ import pytz
 
 from datetime import datetime, timedelta
 
-from django.contrib.sites.models import Site
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 
 from instore_user.managers import InstoreUserManager
+from store.models import Store
 
 
 class InstoreUser(AbstractBaseUser):
@@ -16,8 +16,8 @@ class InstoreUser(AbstractBaseUser):
     mobile_no = models.CharField(
         verbose_name="Mobile Number", max_length=10
     )
-    site = models.ForeignKey(
-        Site,
+    store = models.ForeignKey(
+        Store,
         on_delete=models.CASCADE
     )
     is_active = models.BooleanField(default=True)
@@ -33,7 +33,7 @@ class InstoreUser(AbstractBaseUser):
     REQUIRED_FIELDS = ['mobile_no']
 
     class Meta:
-        unique_together = ('mobile_no', 'site',)
+        unique_together = ('mobile_no', 'store',)
 
     def __str__(self):
         try:

@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.sites.models import Site
 
 from instore_user.models import InstoreUser, OneTimePassword
 from instore_user.forms import UserChangeForm, UserCreationForm
@@ -17,7 +16,7 @@ class InstoreUserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('id', 'username', 'site', 'mobile_no', 'is_owner', 'is_superuser')
+    list_display = ('id', 'username', 'store', 'mobile_no', 'is_owner', 'is_superuser')
     list_filter = ('is_owner', 'is_superuser')
     fieldsets = (
         ('Basic Info', {'fields': ('mobile_no', 'password')}),
@@ -29,7 +28,7 @@ class InstoreUserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('mobile_no', 'site', 'password1', 'password2'),
+            'fields': ('mobile_no', 'store', 'password1', 'password2'),
         }),
     )
     search_fields = ('mobile_no',)
@@ -52,16 +51,6 @@ admin.site.unregister(Group)
 @admin.register(OneTimePassword)
 class OTPAdmin(admin.ModelAdmin):
     list_display = ('user', 'password')
-
-
-# Now register the new Customized Admin Site.
-admin.site.unregister(Site)
-@admin.register(Site)
-class SiteAdmin(admin.ModelAdmin):
-    def has_module_permission(self, request):
-        if request.user.is_superuser:
-            return True
-        return False
 
 
 # Patch the TokenAdmin module permission, so only

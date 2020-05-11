@@ -1,18 +1,22 @@
 from django.db import models
-from django.contrib.sites.models import Site
 from django.utils.translation import gettext as _
 
 from base.models import BaseDateModel
 
 
 class Store(BaseDateModel):
-    site = models.OneToOneField(
-        Site,
-        on_delete=models.CASCADE
+    name = models.CharField(
+        verbose_name=_("Store Name"),
+        max_length=30
+    )
+    domain = models.CharField(
+        verbose_name=_("Domain Name"),
+        max_length=30
     )
     email = models.EmailField()
     logo = models.ImageField(
-        upload_to="store/logo"
+        upload_to="store/logo",
+        null=True, blank=True
     )
     background_color = models.CharField(
         verbose_name=_("Background Color"),
@@ -24,7 +28,7 @@ class Store(BaseDateModel):
     )
 
     def __str__(self):
-        return self.site.name
+        return self.name
 
 
 class Spotlight(BaseDateModel):
@@ -33,11 +37,6 @@ class Spotlight(BaseDateModel):
     )
     image = models.ImageField(
         upload_to="store/spotlights"
-    )
-    product = models.ForeignKey(
-        "store.Product",
-        on_delete=models.CASCADE,
-        null=True, blank=True
     )
 
 
@@ -69,9 +68,22 @@ class Product(BaseDateModel):
         verbose_name=_("Slug"),
         null=True, blank=True
     )
-    description = models.TextField(
-        verbose_name=_("Product Description"),
+    image = models.ImageField(
+        verbose_name=_("Product Images"),
+        upload_to="store/product/images"
+    )
+    caption = models.CharField(
+        verbose_name=_("Product Caption"),
+        max_length=60,
         null=True, blank=True
+    )
+    size = models.CharField(
+        verbose_name=_("Size"),
+        max_length=20
+    )
+    color = models.CharField(
+        verbose_name=_("Color"),
+        max_length=20
     )
     tag = models.CharField(
         verbose_name=_("Tag"),
@@ -93,16 +105,3 @@ class Product(BaseDateModel):
         unique_together = (
             'store', 'slug'
         )
-
-
-class ProductImage(BaseDateModel):
-    product = models.ForeignKey(
-        Product,
-        related_name="product_images",
-        on_delete=models.CASCADE
-    )
-    order = models.IntegerField(default=0)
-    image = models.ImageField(
-        verbose_name=_("Product Images"),
-        upload_to="store/product/images"
-    )
