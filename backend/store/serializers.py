@@ -6,7 +6,6 @@ from store.models import Store, Product
 
 
 class StoreSerializer(serializers.ModelSerializer):
-    name = serializers.CharField(source='site.name')
     logo = serializers.SerializerMethodField()
 
     class Meta:
@@ -15,8 +14,9 @@ class StoreSerializer(serializers.ModelSerializer):
 
     def get_logo(self, store):
         request = self.context.get('request')
-        return request.build_absolute_uri(store.logo.url).\
-            replace("http://", settings.REQUEST_SCHEME)
+        if not store.logo:
+            return None
+        return request.build_absolute_uri(store.logo.url)
 
 
 class ProductSerializer(serializers.ModelSerializer):

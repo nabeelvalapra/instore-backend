@@ -2,7 +2,8 @@ from django.utils.deprecation import MiddlewareMixin
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import SuspiciousOperation
-from django.contrib.sites.models import Site
+
+from store.models import Store
 
 
 class CurrentSiteMiddleware(MiddlewareMixin):
@@ -15,11 +16,13 @@ class CurrentSiteMiddleware(MiddlewareMixin):
         request_uri = request.get_raw_uri()
         if not header_origin:
             if '/admin/' in request_uri and settings.REQUEST_SCHEME in request_uri:
-                request.site = get_object_or_404(Site, id=1)
+                request.store = get_object_or_404(
+                    Store, domain=settings.SUPERUSER_STORE_DOMAIN
+                )
             else:
                 raise SuspiciousOperation(
                     "Missing Origin Header in Request - {}".format(request_uri)
                 )
         else:
             header_origin = header_origin.replace(settings.REQUEST_SCHEME, "")
-            request.site = get_object_or_404(Site, domain__exact=header_origin)
+            request.store = get_object_or_404(Store, domain__exact=header_origin)

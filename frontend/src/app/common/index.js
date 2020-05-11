@@ -1,1 +1,1 @@
-export const APIURL = "https://api.hash37.marketing";
+export const APIURL = "http://localhost:8000";

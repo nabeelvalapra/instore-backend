@@ -14,7 +14,7 @@ class StoreViewSet(
     serializer_class = StoreSerializer
 
     def get_queryset(self):
-        return self.queryset.filter(site=self.request.site)
+        return self.queryset.filter(id=self.request.store.id)
 
 
 class ProductViewSet(
@@ -26,4 +26,4 @@ class ProductViewSet(
     lookup_field = 'slug'
 
     def get_queryset(self):
-        return self.queryset.filter(store__site=self.request.site)
+        return self.queryset.filter(store=self.request.store)
