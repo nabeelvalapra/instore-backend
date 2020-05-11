@@ -1,7 +1,7 @@
 import fetch from 'cross-fetch'
 import types from './types';
 
-import { APIURL } from '../../common'
+import { BACKEND_API_ENDPOINT } from '../../common'
 
 
 export function fetchStoreDetailRequest() {
@@ -34,7 +34,7 @@ export function setTagFilter(tag) {
 export function fetchStoreDetails() {
     return function(dispatch) {
         dispatch(fetchStoreDetailRequest())
-        return fetch(`${APIURL}/`)
+        return fetch(`${BACKEND_API_ENDPOINT}/`)
             .then(
                 response => response.json(),
             )

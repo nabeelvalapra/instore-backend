@@ -1,7 +1,7 @@
 import fetch from 'cross-fetch'
 import types from './types';
 
-import { APIURL } from '../../common'
+import { BACKEND_API_ENDPOINT } from '../../common'
 
 
 export function fetchProductsRequest() {
@@ -28,8 +28,8 @@ export function fetchProducts(productId=null) {
   return function(dispatch) {
     dispatch(fetchProductsRequest())
     let endpoint = (productId
-      ? `${APIURL}/products/${productId}/`
-      : `${APIURL}/products/`
+      ? `${BACKEND_API_ENDPOINT}/products/${productId}/`
+      : `${BACKEND_API_ENDPOINT}/products/`
     )
     return fetch(endpoint)
       .then(

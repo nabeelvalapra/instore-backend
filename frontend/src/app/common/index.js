@@ -1,1 +1,1 @@
-export const APIURL = "https://api.hash37.marketing";
+export const BACKEND_API_ENDPOINT = process.env.REACT_APP_INSTORE_API_ENDPOINT
