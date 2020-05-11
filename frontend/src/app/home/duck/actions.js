@@ -35,14 +35,13 @@ export function fetchStoreDetails() {
     return function(dispatch) {
         dispatch(fetchStoreDetailRequest())
         return fetch(`${BACKEND_API_ENDPOINT}/`)
-            .then(
-                response => response.json(),
-            )
-            .then(
-                json => dispatch(fetchStoreDetailSuccess(json[0]))
-            )
-            .catch(
-                error => dispatch(fetchStoreDetailFailed(error.message))
-            )
+            .then(response => {
+              if(response.status >= 400) {
+                throw new Error("Error fetching store details. Please try again later.")
+              }
+              return response.json()
+            })
+            .then(json => dispatch(fetchStoreDetailSuccess(json[0])))
+            .catch(error => dispatch(fetchStoreDetailFailed(error.message)))
     }
 }

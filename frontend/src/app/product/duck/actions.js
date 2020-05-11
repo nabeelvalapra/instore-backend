@@ -32,14 +32,13 @@ export function fetchProducts(productId=null) {
       : `${BACKEND_API_ENDPOINT}/products/`
     )
     return fetch(endpoint)
-      .then(
-        response => response.json(),
-      )
-      .then(
-        json => dispatch(fetchProductsSuccess((productId ? [json] : json)))
-      )
-      .catch(
-        error => dispatch(fetchProductsFailed(error.message))
-      )
+      .then(response => {
+        if(response.status >= 400) {
+          throw new Error("Error fetching products. Please try again later.")
+        }
+        return response.json()
+      })
+      .then(json => dispatch(fetchProductsSuccess((productId ? [json] : json))))
+      .catch(error => dispatch(fetchProductsFailed(error.message)))
   }
 }
