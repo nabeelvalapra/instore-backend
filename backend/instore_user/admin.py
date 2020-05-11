@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
+from django.contrib.sites.models import Site
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from instore_user.models import InstoreUser, OneTimePassword
@@ -51,6 +52,15 @@ admin.site.unregister(Group)
 @admin.register(OneTimePassword)
 class OTPAdmin(admin.ModelAdmin):
     list_display = ('user', 'password')
+
+
+admin.site.unregister(Site)
+# @admin.register(Site)
+# class SiteAdmin(admin.ModelAdmin):
+#     def has_module_permission(self, request):
+#         if request.user.is_superuser:
+#             return True
+#   return False
 
 
 # Patch the TokenAdmin module permission, so only

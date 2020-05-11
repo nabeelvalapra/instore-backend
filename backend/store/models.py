@@ -11,6 +11,7 @@ class Store(BaseDateModel):
     )
     domain = models.CharField(
         verbose_name=_("Domain Name"),
+        unique=True,
         max_length=30
     )
     email = models.EmailField()

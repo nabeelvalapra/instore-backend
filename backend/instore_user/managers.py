@@ -46,4 +46,5 @@ class InstoreUserManager(BaseUserManager):
         user.is_superuser = True
         user.is_owner = True
         user.save(using=self._db)
+        print("Username: ", user.username)
         return user

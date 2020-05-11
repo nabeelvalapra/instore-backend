@@ -1,3 +1,6 @@
+# Enables Django Site
+SITE_ID = "1"
+
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -12,7 +15,6 @@ DATABASES = {
     }
 }
 
-SITE_ID = "1"
 
 ALLOWED_HOSTS = "*"
 
@@ -21,3 +23,9 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 REQUEST_SCHEMA = "https://"
+
+SUPERUSER_STORE_NAME = "Admin Store"
+SUPERUSER_STORE_DOMAIN = "api.hash37.marketing"
+SUPERUSER_STORE_EMAIL = "nabeel@hash37.com"
+SUPERUSER_STORE_BG_COLOR = "#ffffff"
+SUPERUSER_STORE_BUTTON_COLOR = "#ffffff"
