@@ -18,7 +18,7 @@ export const store = (state=storeInitialState, action) => {
       let json = action.json
       return Object.assign({}, state, {
           isFetching: false,
-          store: {
+          details: {
             "name": json.name,
             "logo": json.logo,
             "backgroundColor": json.background_color,

@@ -5,7 +5,7 @@ import { setTagFilter } from './duck/actions';
 import { fetchProducts } from '../product/duck/actions';
 
 import Header from './components/Header';
-// import Spotlight from './components/Spotlight'
+import Spotlights from './components/Spotlight'
 import { TagFilter, ProductList } from './components/ProductTab'
 
 
@@ -22,6 +22,7 @@ class HomeContainer extends Component{
     const {
       storeIsFetching, store, storeError,
       productsIsFetching, products, productsError,
+      spotlightIsFetching, spotlight, spotlightError,
       tagFilter, setTagFilter
     } = this.props
 
@@ -29,6 +30,8 @@ class HomeContainer extends Component{
       <>
         <section className="wrapp">
           <div className="right_content">
+
+            {/* Displays <Header/> if store-fetch is success */}
             {(!storeIsFetching && store)
               ? (
                 <Header
@@ -41,26 +44,41 @@ class HomeContainer extends Component{
               )
             }
 
-            {(!productsIsFetching && products && store)
-              ? (
-		 	          <section id="content">
-                  <TagFilter
-                    setTagFilter={setTagFilter}
-                    buttonColor={store.buttonColor}
-                    activeTag={tagFilter}
-                  />
-                  <ProductList
-                    products={products}
-                    tagFilter={tagFilter}
-                  />
-                </section>
-              )
-              : (
-                (!productsIsFetching && productsError)
-                ? <p> { productsError } </p> : <p> Fetching product details ...</p>
-              )
-            }
+		 	      <section id="content">
 
+              {/* Displays <Spotlight/> if spotlight-fetch is success */}
+              {(!spotlightIsFetching && spotlight)
+                ? (
+                  <Spotlights spotlights={spotlight}/>
+                )
+                : (
+                  (!spotlightIsFetching && spotlight)
+                  ? <p> { spotlightError } </p> : <p> Fetching spotlight details...</p>
+                )
+              }
+
+              {/* Displays <TagFilter/> & <ProductList/> if product-fetch is success */}
+              {(!productsIsFetching && products && store)
+                ? (
+                  <>
+                    <TagFilter
+                      setTagFilter={setTagFilter}
+                      buttonColor={store.buttonColor}
+                      activeTag={tagFilter}
+                    />
+                    <ProductList
+                      products={products}
+                      tagFilter={tagFilter}
+                    />
+                  </>
+                )
+                : (
+                  (!productsIsFetching && productsError)
+                  ? <p> { productsError } </p> : <p> Fetching product details ...</p>
+                )
+              }
+
+            </section>
           </div>
         </section>
       </>
@@ -69,9 +87,13 @@ class HomeContainer extends Component{
 }
 
 const mapStateToProps = state => {
-  const { store } = state.store;
+  const store = state.store.details;
   const storeIsFetching = state.store.isFetching;
   const storeError = state.store.error;
+
+  const spotlight = state.spotlight.images;
+  const spotlightIsFetching = state.spotlight.isFetching;
+  const spotlightError = state.spotlight.error;
 
   const products = state.product.items;
   const productsIsFetching = state.product.isFetching;
@@ -82,6 +104,7 @@ const mapStateToProps = state => {
   return {
     storeIsFetching, store, storeError,
     productsIsFetching, products, productsError,
+    spotlightIsFetching, spotlight, spotlightError,
     tagFilter
   }
 };
