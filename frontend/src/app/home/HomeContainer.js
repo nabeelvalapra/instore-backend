@@ -11,7 +11,7 @@ import { TagFilter, ProductList } from './components/ProductTab'
 
 class HomeContainer extends Component{
   componentDidMount() {
-    if(!this.props.storeIsFetching && !this.props.store){
+    if(!this.props.store.isFetching && !this.props.store.details){
       this.props.fetchStoreDetails()
       this.props.fetchStoreSpotlight()
       this.props.fetchProducts()
@@ -20,10 +20,7 @@ class HomeContainer extends Component{
 
   render() {
     const {
-      storeIsFetching, store, storeError,
-      productsIsFetching, products, productsError,
-      spotlightIsFetching, spotlight, spotlightError,
-      tagFilter, setTagFilter
+      store, product, spotlight, tagFilter, setTagFilter
     } = this.props
 
     return (
@@ -32,49 +29,49 @@ class HomeContainer extends Component{
           <div className="right_content">
 
             {/* Displays <Header/> if store-fetch is success */}
-            {(!storeIsFetching && store)
+            {(!store.isFetching && store.details)
               ? (
                 <Header
-                  backgroundColor={store.backgroundColor}
+                  backgroundColor={store.details.backgroundColor}
                 />
               )
               : (
-                (!storeIsFetching && storeError)
-                ? <p> { storeError } </p> : <p> Fetching store details...</p>
+                (!store.isFetching && store.error)
+                ? <p> { store.error } </p> : <p> Fetching store details...</p>
               )
             }
 
 		 	      <section id="content">
 
               {/* Displays <Spotlight/> if spotlight-fetch is success */}
-              {(!spotlightIsFetching && spotlight)
+              {(!spotlight.isFetching && spotlight.images)
                 ? (
-                  <Spotlights spotlights={spotlight}/>
+                  <Spotlights spotlights={spotlight.images}/>
                 )
                 : (
-                  (!spotlightIsFetching && spotlight)
-                  ? <p> { spotlightError } </p> : <p> Fetching spotlight details...</p>
+                  (!spotlight.isFetching && spotlight.images)
+                  ? <p> { spotlight.error } </p> : <p> Fetching spotlight details...</p>
                 )
               }
 
               {/* Displays <TagFilter/> & <ProductList/> if product-fetch is success */}
-              {(!productsIsFetching && products && store)
+              {(!product.isFetching && product.items && store.details)
                 ? (
                   <>
                     <TagFilter
                       setTagFilter={setTagFilter}
-                      buttonColor={store.buttonColor}
+                      buttonColor={store.details.buttonColor}
                       activeTag={tagFilter}
                     />
                     <ProductList
-                      products={products}
+                      products={product.items}
                       tagFilter={tagFilter}
                     />
                   </>
                 )
                 : (
-                  (!productsIsFetching && productsError)
-                  ? <p> { productsError } </p> : <p> Fetching product details ...</p>
+                  (!product.isFetching && product.error)
+                  ? <p> { product.error } </p> : <p> Fetching product details ...</p>
                 )
               }
 
@@ -87,25 +84,9 @@ class HomeContainer extends Component{
 }
 
 const mapStateToProps = state => {
-  const store = state.store.details;
-  const storeIsFetching = state.store.isFetching;
-  const storeError = state.store.error;
-
-  const spotlight = state.spotlight.images;
-  const spotlightIsFetching = state.spotlight.isFetching;
-  const spotlightError = state.spotlight.error;
-
-  const products = state.product.items;
-  const productsIsFetching = state.product.isFetching;
-  const productsError = state.product.error;
-
-  const { tagFilter } = state;
-
+  const { store, spotlight, product, tagFilter } = state;
   return {
-    storeIsFetching, store, storeError,
-    productsIsFetching, products, productsError,
-    spotlightIsFetching, spotlight, spotlightError,
-    tagFilter
+    store, product, spotlight, tagFilter
   }
 };
 

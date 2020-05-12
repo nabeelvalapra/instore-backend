@@ -23,8 +23,8 @@ class Spotlights extends Component{
         <>
           <div className="banner_slider">
             <div className="slider_wrap">
-              {spotlights.map((spotlight) => {
-                return <Spotlight image={spotlight.image}/>
+              {spotlights.map((spotlight, index) => {
+                return <Spotlight key={index} image={spotlight.image}/>
               })}
             </div>
           </div>
