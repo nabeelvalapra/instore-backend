@@ -25,58 +25,51 @@ class HomeContainer extends Component{
 
     return (
       <>
-        <section className="wrapp">
-          <div className="right_content">
+        {/* Displays <Header/> if store-fetch is success */}
+        {(!store.isFetching && store.details)
+          ? (
+            <Header
+              backgroundColor={store.details.backgroundColor}
+            />
+          )
+          : (
+            (!store.isFetching && store.error)
+            ? <p> { store.error } </p> : <p> Fetching store details...</p>
+          )
+        }
 
-            {/* Displays <Header/> if store-fetch is success */}
-            {(!store.isFetching && store.details)
-              ? (
-                <Header
-                  backgroundColor={store.details.backgroundColor}
+		 	  <section id="content">
+          {/* Displays <Spotlight/> if spotlight-fetch is success */}
+          {(!spotlight.isFetching && spotlight.images)
+            ? (
+              <Spotlights spotlights={spotlight.images}/>
+            )
+            : (
+              (!spotlight.isFetching && spotlight.images)
+              ? <p> { spotlight.error } </p> : <p> Fetching spotlight details...</p>
+            )
+          }
+
+          {/* Displays <TagFilter/> & <ProductList/> if product-fetch is success */}
+          {(!product.isFetching && product.items && store.details)
+            ? (
+              <>
+                <TagFilter
+                  setTagFilter={setTagFilter}
+                  buttonColor={store.details.buttonColor}
+                  activeTag={tagFilter}
                 />
-              )
-              : (
-                (!store.isFetching && store.error)
-                ? <p> { store.error } </p> : <p> Fetching store details...</p>
-              )
-            }
-
-		 	      <section id="content">
-
-              {/* Displays <Spotlight/> if spotlight-fetch is success */}
-              {(!spotlight.isFetching && spotlight.images)
-                ? (
-                  <Spotlights spotlights={spotlight.images}/>
-                )
-                : (
-                  (!spotlight.isFetching && spotlight.images)
-                  ? <p> { spotlight.error } </p> : <p> Fetching spotlight details...</p>
-                )
-              }
-
-              {/* Displays <TagFilter/> & <ProductList/> if product-fetch is success */}
-              {(!product.isFetching && product.items && store.details)
-                ? (
-                  <>
-                    <TagFilter
-                      setTagFilter={setTagFilter}
-                      buttonColor={store.details.buttonColor}
-                      activeTag={tagFilter}
-                    />
-                    <ProductList
-                      products={product.items}
-                      tagFilter={tagFilter}
-                    />
-                  </>
-                )
-                : (
-                  (!product.isFetching && product.error)
-                  ? <p> { product.error } </p> : <p> Fetching product details ...</p>
-                )
-              }
-
-            </section>
-          </div>
+                <ProductList
+                  products={product.items}
+                  tagFilter={tagFilter}
+                />
+              </>
+            )
+            : (
+              (!product.isFetching && product.error)
+              ? <p> { product.error } </p> : <p> Fetching product details ...</p>
+            )
+          }
         </section>
       </>
     )
