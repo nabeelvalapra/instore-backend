@@ -33,8 +33,10 @@ class Store(BaseDateModel):
 
 
 class Spotlight(BaseDateModel):
-    order = models.IntegerField(
-        verbose_name=_("Order Number"),
+    store = models.ForeignKey(
+        Store,
+        on_delete=models.CASCADE,
+        null=True, blank=True
     )
     image = models.ImageField(
         upload_to="store/spotlights"

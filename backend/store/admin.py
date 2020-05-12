@@ -1,5 +1,6 @@
 from django.contrib import admin
-from store.models import Store, Product
+
+from store.models import Store, Product, Spotlight
 
 
 class ProductInline(admin.TabularInline):
@@ -24,4 +25,9 @@ class StoreAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Spotlight)
+class SpotlightAdmin(admin.ModelAdmin):
     pass

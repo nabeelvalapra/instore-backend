@@ -20,7 +20,9 @@ class CurrentSiteMiddleware(MiddlewareMixin):
                     Store, domain=settings.SUPERUSER_STORE_DOMAIN
                 )
             else:
-                if not settings.DEBUG:
+                if settings.DEBUG:
+                    request.store = get_object_or_404(Store, id=settings.DEBUG_STORE_ID)
+                else:
                     raise SuspiciousOperation(
                         "Missing Origin Header in Request - {}".format(request_uri)
                     )

@@ -1,10 +1,7 @@
-from django.shortcuts import get_object_or_404
-
 from rest_framework import viewsets, mixins
-from rest_framework.response import Response
 
-from store.serializers import StoreSerializer, ProductSerializer
-from store.models import Store, Product
+from store.serializers import StoreSerializer, ProductSerializer, SpotlightSerializer
+from store.models import Store, Product, Spotlight
 
 
 class StoreViewSet(
@@ -15,6 +12,16 @@ class StoreViewSet(
 
     def get_queryset(self):
         return self.queryset.filter(id=self.request.store.id)
+
+
+class SpotlightViewSet(
+    mixins.ListModelMixin, viewsets.GenericViewSet
+):
+    queryset = Spotlight.objects.all()
+    serializer_class = SpotlightSerializer
+
+    def get_queryset(self):
+        return self.queryset.filter(store=self.request.store)
 
 
 class ProductViewSet(

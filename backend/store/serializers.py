@@ -1,8 +1,6 @@
-from django.conf import settings
-
 from rest_framework import serializers
 
-from store.models import Store, Product
+from store.models import Store, Product, Spotlight
 
 
 class StoreSerializer(serializers.ModelSerializer):
@@ -17,6 +15,12 @@ class StoreSerializer(serializers.ModelSerializer):
         if not store.logo:
             return None
         return request.build_absolute_uri(store.logo.url)
+
+
+class SpotlightSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Spotlight
+        fields = ("image", )
 
 
 class ProductSerializer(serializers.ModelSerializer):
