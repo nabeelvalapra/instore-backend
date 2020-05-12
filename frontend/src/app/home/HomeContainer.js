@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { fetchStoreDetails, setTagFilter } from './duck/actions';
+import { fetchStoreDetails, fetchStoreSpotlight } from './duck/operations';
+import { setTagFilter } from './duck/actions';
 import { fetchProducts } from '../product/duck/actions';
 
 import Header from './components/Header';
-import Spotlight from './components/Spotlight'
+// import Spotlight from './components/Spotlight'
 import { TagFilter, ProductList } from './components/ProductTab'
 
 
@@ -12,6 +13,7 @@ class HomeContainer extends Component{
   componentDidMount() {
     if(!this.props.storeIsFetching && !this.props.store){
       this.props.fetchStoreDetails()
+      this.props.fetchStoreSpotlight()
       this.props.fetchProducts()
     }
   }
@@ -35,27 +37,27 @@ class HomeContainer extends Component{
               )
               : (
                 (!storeIsFetching && storeError)
-                  ? <p> { storeError } </p>
-                  : <p> Fetching store details...</p>
+                ? <p> { storeError } </p> : <p> Fetching store details...</p>
               )
             }
 
             {(!productsIsFetching && products && store)
               ? (
 		 	          <section id="content">
-                  <Spotlight />
                   <TagFilter
                     setTagFilter={setTagFilter}
                     buttonColor={store.buttonColor}
                     activeTag={tagFilter}
                   />
-                  <ProductList products={products} tagFilter={tagFilter}/>
+                  <ProductList
+                    products={products}
+                    tagFilter={tagFilter}
+                  />
                 </section>
               )
               : (
                 (!productsIsFetching && productsError)
-                  ? <p> { productsError } </p>
-                  : <p> Fetching product details ...</p>
+                ? <p> { productsError } </p> : <p> Fetching product details ...</p>
               )
             }
 
@@ -87,6 +89,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchStoreDetails: () => dispatch(fetchStoreDetails()),
+    fetchStoreSpotlight: () => dispatch(fetchStoreSpotlight()),
     fetchProducts: () => dispatch(fetchProducts()),
     setTagFilter: (tag) => dispatch(setTagFilter(tag))
   }

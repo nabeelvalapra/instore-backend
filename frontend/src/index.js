@@ -12,7 +12,7 @@ import App from './app/App';
 
 import { combineReducers } from 'redux'
 import { auth } from './app/common/reducers/auth'
-import { store as homeStore, tagFilter } from './app/home/duck/reducers'
+import { store as homeStore, tagFilter, spotlight } from './app/home/duck/reducers'
 import { product } from './app/product/duck/reducers'
 import { connectRouter } from 'connected-react-router'
 
@@ -20,7 +20,7 @@ import { connectRouter } from 'connected-react-router'
 const history = createBrowserHistory()
 
 const rootReducer = combineReducers(
-  {auth, product, tagFilter, store: homeStore, router: connectRouter(history)}
+  {auth, product, tagFilter, spotlight, store: homeStore, router: connectRouter(history)}
 )
 
 let middleware = [thunkMiddleware, routerMiddleware(history)]

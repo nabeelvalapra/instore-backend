@@ -1,11 +1,11 @@
 import types from './types';
 
 
-const initialState = {
+const storeInitialState = {
   isFetching: false,
 }
 
-export const store = (state=initialState, action) => {
+export const store = (state=storeInitialState, action) => {
 
   switch (action.type) {
 
@@ -37,10 +37,39 @@ export const store = (state=initialState, action) => {
   }
 }
 
+
+const spotlightInitialState = {
+  isFetching: false,
+}
+export const spotlight = (state=spotlightInitialState, action) => {
+
+  switch (action.type) {
+
+    case types.FETCH_STORE_SPOTLIGHT_REQUEST:
+      return Object.assign({}, state, {
+          isFetching: true,
+      })
+
+    case types.FETCH_STORE_SPOTLIGHT_SUCCESS:
+      return Object.assign({}, state, {
+          isFetching: false,
+          images: action.json
+        })
+
+      case types.FETCH_STORE_DETAIL_FAILED:
+        return Object.assign({}, state, {
+          isFetching: false,
+          error: action.errorMsg
+        })
+
+    default:
+      return state
+  }
+}
+
 export const tagFilter = (state = "popular", action) => {
   if(action.tag){
     return action.tag
-  }else{
-    return state
   }
+  return state
 }
