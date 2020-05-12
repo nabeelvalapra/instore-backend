@@ -8,7 +8,7 @@ from store.models import Store
 
 class CurrentSiteMiddleware(MiddlewareMixin):
     """
-    Middleware that sets `site` attribute to request `Origin`.
+    Middleware that sets `store` attribute to request `Origin`.
     """
 
     def process_request(self, request):
@@ -20,9 +20,10 @@ class CurrentSiteMiddleware(MiddlewareMixin):
                     Store, domain=settings.SUPERUSER_STORE_DOMAIN
                 )
             else:
-                raise SuspiciousOperation(
-                    "Missing Origin Header in Request - {}".format(request_uri)
-                )
+                if not settings.DEBUG:
+                    raise SuspiciousOperation(
+                        "Missing Origin Header in Request - {}".format(request_uri)
+                    )
         else:
             header_origin = header_origin.replace(settings.REQUEST_SCHEME, "")
             request.store = get_object_or_404(Store, domain__exact=header_origin)

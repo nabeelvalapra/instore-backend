@@ -20,18 +20,10 @@ class StoreSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    product_images = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
         fields = [
-            "id", "name", "price", "description", "slug",
-            "tag", "availability", "product_images"
+            "id", "name", "price", "slug", "caption", "size", "color",
+            "tag", "availability", "image"
         ]
-
-    def get_product_images(self, product):
-        request = self.context.get('request')
-        product_image = {}
-        for item in product.product_images.all():
-            product_image[item.order] = request.build_absolute_uri(item.image.url)
-        return product_image

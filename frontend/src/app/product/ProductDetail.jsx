@@ -24,7 +24,7 @@ class ProductDetail extends Component{
                     <div className="slider_wrap">
                       <div className="col">
                         <div className="imgcover">
-                          <img src={product.product_images[0]} alt=""/>
+                          <img src={product.image} alt=""/>
                         </div>
                       </div>
                     </div>

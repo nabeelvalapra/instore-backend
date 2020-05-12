@@ -81,7 +81,7 @@ export class Product extends Component {
       <div className="product col-xs-6">
         <div className="img_cover">
           <Link to={`/product/${product.slug}/`}>
-            <img src={product.product_images[0]} alt="" />
+            <img src={product.image} alt="" />
           </Link>
           <span className="add_w_list" />
         </div>
