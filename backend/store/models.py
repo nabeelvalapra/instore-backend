@@ -42,6 +42,9 @@ class Spotlight(BaseDateModel):
         upload_to="store/spotlights"
     )
 
+    def __str__(self):
+        return "{} - ({})".format(self.store.name, self.image.name)
+
 
 class Product(BaseDateModel):
 
