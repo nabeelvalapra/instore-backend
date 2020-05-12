@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchStoreDetails, fetchStoreSpotlight } from './duck/operations';
 import { setTagFilter } from './duck/actions';
 import { fetchProducts } from '../product/duck/actions';
+import { Helmet } from "react-helmet";
 
 import Header from './components/Header';
 import Spotlights from './components/Spotlight'
@@ -28,9 +29,16 @@ class HomeContainer extends Component{
         {/* Displays <Header/> if store-fetch is success */}
         {(!store.isFetching && store.details)
           ? (
-            <Header
-              backgroundColor={store.details.backgroundColor}
-            />
+            <>
+              <Helmet>
+                <title>{store.details.name}</title>
+                <link rel="icon" href={store.details.logo} />
+              </Helmet>
+              <Header
+                backgroundColor={store.details.backgroundColor}
+                logo={store.details.logo}
+             />
+            </>
           )
           : (
             (!store.isFetching && store.error)

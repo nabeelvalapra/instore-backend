@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types'
 
-import '../../../assets/css/bootstrap.min.css'
-import '../../../assets/css/style.css'
-
-import logo from '../../../assets/images/logo.png'
-
+import '../../../assets/css/bootstrap.min.css';
+import '../../../assets/css/style.css';
 
 // class Menu extends Component{
 //     render() {
@@ -41,7 +38,7 @@ class Header extends Component{
                 <i className="last" />
               </button>
               <a className="brand-name" href="index.html">
-                <img src={ logo } alt="logo" />
+                <img src={this.props.logo} alt="logo" />
               </a>
               <div className="right">
                 {/* <a href="#" className="wishlist_link" /> */}
