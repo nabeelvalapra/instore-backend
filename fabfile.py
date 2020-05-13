@@ -16,6 +16,6 @@ def deploy_backend(c):
 def deploy_frontend(c):
     c.run("cd instore && git reset --hard origin/master")
     c.run("cd instore && git pull origin master")
-    c.run("cd instore/frontend/ && npm run build")
+    c.run("cd instore/frontend/ && npm install && npm run build")
     c.run("rm -r /home/admin/frontend-build && "
           "mv /home/admin/instore/frontend/build /home/admin/frontend-build")

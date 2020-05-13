@@ -21,7 +21,7 @@ class SpotlightViewSet(
     serializer_class = SpotlightSerializer
 
     def get_queryset(self):
-        return self.queryset.filter(store=self.request.store)
+        return self.queryset.filter(store=self.request.store).order_by('created_at')
 
 
 class ProductViewSet(
@@ -33,4 +33,4 @@ class ProductViewSet(
     lookup_field = 'slug'
 
     def get_queryset(self):
-        return self.queryset.filter(store=self.request.store)
+        return self.queryset.filter(store=self.request.store).order_by('created_at')
