@@ -1,0 +1,12 @@
+server {
+    server_name frontend-domain.com;
+    root /home/admin/frontend-build;
+    index index.html index.htm;
+
+    location ~ ^/(backend-domain.com) {
+	    deny all;
+    }
+
+    location / {
+    }
+}
