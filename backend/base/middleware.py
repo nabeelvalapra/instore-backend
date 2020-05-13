@@ -20,7 +20,7 @@ class CurrentSiteMiddleware(MiddlewareMixin):
                     Store, domain=settings.SUPERUSER_STORE_DOMAIN
                 )
             else:
-                if settings.DEBUG:
+                if settings.get("DEBUG_STORE_ID", None):
                     request.store = get_object_or_404(Store, id=settings.DEBUG_STORE_ID)
                 else:
                     raise SuspiciousOperation(
