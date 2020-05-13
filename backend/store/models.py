@@ -83,13 +83,19 @@ class Product(BaseDateModel):
         max_length=60,
         null=True, blank=True
     )
+    order = models.IntegerField(
+        verbose_name=_("Order (Priority: 10-1)"),
+        null=True, blank=True
+    )
     size = models.CharField(
         verbose_name=_("Size"),
-        max_length=20
+        max_length=20,
+        null=True, blank=True
     )
     color = models.CharField(
         verbose_name=_("Color"),
-        max_length=20
+        max_length=20,
+        null=True, blank=True
     )
     tag = models.CharField(
         verbose_name=_("Tag"),
