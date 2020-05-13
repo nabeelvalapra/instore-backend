@@ -4,6 +4,7 @@ import pytz
 from datetime import datetime, timedelta
 
 from django.db import models
+from django.utils.translation import gettext as _
 from django.contrib.auth.models import AbstractBaseUser
 
 from instore_user.managers import InstoreUserManager
@@ -34,6 +35,7 @@ class InstoreUser(AbstractBaseUser):
 
     class Meta:
         unique_together = ('mobile_no', 'store',)
+        verbose_name = _("Instore User")
 
     def __str__(self):
         try:
@@ -70,6 +72,9 @@ class OneTimePassword(models.Model):
     created_at = models.DateTimeField(
         auto_now_add=True
     )
+
+    class Meta:
+        verbose_name = _("One Time Password")
 
     @property
     def expiry_datetime(self):

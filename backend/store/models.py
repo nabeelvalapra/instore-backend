@@ -85,7 +85,8 @@ class Product(BaseDateModel):
     )
     order = models.IntegerField(
         verbose_name=_("Order (Priority: 10-1)"),
-        null=True, blank=True
+        null=True, blank=True,
+        default=10
     )
     size = models.CharField(
         verbose_name=_("Size"),
