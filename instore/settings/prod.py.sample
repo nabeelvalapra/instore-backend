@@ -11,8 +11,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'instore_production',
-        'USER': 'instore_postgres',
-        'PASSWORD': 'postgrespass',
+        'USER': 'insore_postgres',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '5432',
     }

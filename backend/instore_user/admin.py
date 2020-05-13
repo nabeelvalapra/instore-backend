@@ -20,7 +20,7 @@ class InstoreUserAdmin(BaseUserAdmin):
     list_display = ('id', 'username', 'store', 'mobile_no', 'is_owner', 'is_superuser')
     list_filter = ('is_owner', 'is_superuser')
     fieldsets = (
-        ('Basic Info', {'fields': ('mobile_no', 'password')}),
+        ('Basic Info', {'fields': ('username', 'mobile_no', 'password')}),
         ('Permissions', {'fields': ('is_owner', 'is_superuser')}),
 
     )
