@@ -1,1 +1,0 @@
-export const BACKEND_API_ENDPOINT = process.env.REACT_APP_INSTORE_API_ENDPOINT
