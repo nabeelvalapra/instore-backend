@@ -4,7 +4,7 @@ from django.utils.translation import gettext as _
 
 from base.models import BaseDateModel
 
-from store.models import Product
+from product.models import FashionProduct
 
 
 class Customer(BaseDateModel):
@@ -35,7 +35,7 @@ class Purchase(BaseDateModel):
         on_delete=models.CASCADE,
     )
     product = models.ForeignKey(
-        Product,
+        FashionProduct,
         on_delete=models.CASCADE
     )
     address = models.TextField(

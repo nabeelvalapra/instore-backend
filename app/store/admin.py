@@ -1,10 +1,11 @@
 from django.contrib import admin
 
-from store.models import Store, Product, Spotlight, Webdata
+from store.models import Store, Spotlight, Webdata
+from product.models import FashionProduct
 
 
 class ProductInline(admin.TabularInline):
-    model = Product
+    model = FashionProduct
 
 
 class WebdataInline(admin.StackedInline):
@@ -13,7 +14,7 @@ class WebdataInline(admin.StackedInline):
 
 @admin.register(Store)
 class StoreAdmin(admin.ModelAdmin):
-    inlines = [ProductInline, WebdataInline]
+    inlines = [WebdataInline, ProductInline]
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -25,11 +26,6 @@ class StoreAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return True
         return False
-
-
-@admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
-    pass
 
 
 @admin.register(Spotlight)

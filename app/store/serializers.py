@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from store.models import Store, Product, Spotlight, Webdata
+from store.models import Store, Spotlight, Webdata
 
 
 class WebdataSerializer(serializers.ModelSerializer):
@@ -21,13 +21,3 @@ class SpotlightSerializer(serializers.ModelSerializer):
     class Meta:
         model = Spotlight
         fields = ("image", )
-
-
-class ProductSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Product
-        fields = [
-            "id", "name", "price", "slug", "caption", "size", "color",
-            "tag", "availability", "image"
-        ]

@@ -1,8 +1,8 @@
 from rest_framework import viewsets, mixins
 from rest_framework.response import Response
 
-from store.serializers import StoreSerializer, ProductSerializer, SpotlightSerializer
-from store.models import Store, Product, Spotlight
+from store.serializers import StoreSerializer, SpotlightSerializer
+from store.models import Store, Spotlight
 
 
 class StoreViewSet(
@@ -22,18 +22,6 @@ class SpotlightViewSet(
 ):
     queryset = Spotlight.objects.all()
     serializer_class = SpotlightSerializer
-
-    def get_queryset(self):
-        return self.queryset.filter(store=self.request.store).order_by('order')
-
-
-class ProductViewSet(
-    mixins.ListModelMixin, mixins.RetrieveModelMixin,
-    viewsets.GenericViewSet
-):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    lookup_field = 'slug'
 
     def get_queryset(self):
         return self.queryset.filter(store=self.request.store).order_by('order')

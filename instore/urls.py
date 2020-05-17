@@ -25,10 +25,13 @@ from customer.viewsets import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('store.urls')),
-    path('', include('customer.urls')),
+
     path('login-otp/', RequestOTPAPIView.as_view(), name='login_otp'),
     path('auth-token/', TokenAPIView.as_view(), name='auth_token'),
+
+    path('', include('store.urls')),
+    path('products', include('product.urls')),
+    path('customer', include('customer.urls')),
 ] + \
     static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
     static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

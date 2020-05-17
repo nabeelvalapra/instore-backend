@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'instore_user',
     'rest_framework',
     'rest_framework.authtoken',
+
     'store',
-    'customer'
+    'customer',
+    'product'
 ]
 
 # User Model
