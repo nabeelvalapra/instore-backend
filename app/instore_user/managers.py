@@ -35,9 +35,6 @@ class InstoreUserManager(BaseUserManager):
             name=settings.SUPERUSER_STORE_NAME,
             domain=settings.SUPERUSER_STORE_DOMAIN,
             email=settings.SUPERUSER_STORE_EMAIL,
-            background_color=settings.SUPERUSER_STORE_BG_COLOR,
-            button_color=settings.SUPERUSER_STORE_BUTTON_COLOR
-
         )
 
         user = self.create_user(
