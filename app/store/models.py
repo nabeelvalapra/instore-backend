@@ -59,3 +59,29 @@ class Spotlight(BaseDateModel):
 
     def __str__(self):
         return "{} - ({})".format(self.store.name, self.image.name)
+
+
+class Tag(BaseDateModel):
+    store = models.ForeignKey(
+        Store,
+        on_delete=models.CASCADE,
+        related_name='tags'
+    )
+    name = models.CharField(
+        verbose_name=_("Tag Name"),
+        max_length=12
+    )
+    slug = models.SlugField(
+        verbose_name=_('Tag Slug'),
+    )
+    order = models.IntegerField(
+        verbose_name=_("Order"),
+    )
+
+    def __str__(self):
+        return "{} - {}".format(self.store.name, self.name)
+
+    class Meta:
+        unique_together = (
+            'store', 'slug'
+        )

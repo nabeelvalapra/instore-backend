@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from store.models import Store, Spotlight, Webdata
+from store.models import Store, Spotlight, Webdata, Tag
 from product.models import FashionProduct
 
 
@@ -12,9 +12,13 @@ class WebdataInline(admin.StackedInline):
     model = Webdata
 
 
+class TagInline(admin.TabularInline):
+    model = Tag
+
+
 @admin.register(Store)
 class StoreAdmin(admin.ModelAdmin):
-    inlines = [WebdataInline, ProductInline]
+    inlines = [WebdataInline, TagInline, ProductInline]
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)

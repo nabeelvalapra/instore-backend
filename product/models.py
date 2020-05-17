@@ -3,7 +3,7 @@ from django.utils.translation import gettext as _
 
 from base.models import BaseDateModel
 
-from store.models import Store
+from store.models import Store, Tag
 
 
 class FashionProduct(BaseDateModel):
@@ -13,13 +13,12 @@ class FashionProduct(BaseDateModel):
         AVAILABLE = 1, _("Available")
         FAST_MOVING = 2, _("Fast Moving")
 
-    class TagChoices(models.TextChoices):
-        POPULAR = "popular", _("Popular")
-        NEW_ARRIVALS = "new_arrivals", _("New Arrivals")
-        DEALS = "deals", _("Deals")
-
     store = models.ForeignKey(
         Store,
+        on_delete=models.CASCADE
+    )
+    tag = models.ForeignKey(
+        Tag,
         on_delete=models.CASCADE
     )
     price = models.IntegerField(
@@ -57,12 +56,6 @@ class FashionProduct(BaseDateModel):
         verbose_name=_("Color"),
         max_length=20,
         null=True, blank=True
-    )
-    tag = models.CharField(
-        verbose_name=_("Tag"),
-        max_length=15,
-        choices=TagChoices.choices,
-        default=TagChoices.POPULAR
     )
     availability = models.CharField(
         verbose_name=_("Availability Status"),
