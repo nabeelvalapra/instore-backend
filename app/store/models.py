@@ -15,21 +15,28 @@ class Store(BaseDateModel):
         max_length=30
     )
     email = models.EmailField()
+
+    def __str__(self):
+        return self.name
+
+
+class Webdata(BaseDateModel):
+    store = models.OneToOneField(
+        Store,
+        on_delete=models.CASCADE
+    )
     logo = models.ImageField(
         upload_to="store/logo",
         null=True, blank=True
     )
-    background_color = models.CharField(
-        verbose_name=_("Background Color"),
+    theme_color = models.CharField(
+        verbose_name=_("Theme Color Code"),
         max_length=7
     )
-    button_color = models.CharField(
-        verbose_name=_("Button Color"),
+    accent_color = models.CharField(
+        verbose_name=_("Accent Color Code"),
         max_length=7
     )
-
-    def __str__(self):
-        return self.name
 
 
 class Spotlight(BaseDateModel):
@@ -40,6 +47,11 @@ class Spotlight(BaseDateModel):
     )
     image = models.ImageField(
         upload_to="store/spotlights"
+    )
+    order = models.IntegerField(
+        verbose_name=_("Order (Priority: 10-1)"),
+        null=True, blank=True,
+        default=10
     )
 
     def __str__(self):

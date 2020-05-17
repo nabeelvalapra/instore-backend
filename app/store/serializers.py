@@ -1,20 +1,20 @@
 from rest_framework import serializers
 
-from store.models import Store, Product, Spotlight
+from store.models import Store, Product, Spotlight, Webdata
+
+
+class WebdataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Webdata
+        fields = ('logo', 'theme_color', 'accent_color')
 
 
 class StoreSerializer(serializers.ModelSerializer):
-    logo = serializers.SerializerMethodField()
+    style = WebdataSerializer(source='webdata')
 
     class Meta:
         model = Store
-        fields = ("email", "logo", "name", "background_color", "button_color")
-
-    def get_logo(self, store):
-        request = self.context.get('request')
-        if not store.logo:
-            return None
-        return request.build_absolute_uri(store.logo.url)
+        fields = ("email", "name", "style")
 
 
 class SpotlightSerializer(serializers.ModelSerializer):
