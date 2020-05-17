@@ -4,6 +4,7 @@ from product.models import FashionProduct
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    tag = serializers.CharField(source='tag.slug')
 
     class Meta:
         model = FashionProduct

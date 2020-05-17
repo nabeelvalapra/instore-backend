@@ -30,7 +30,7 @@ urlpatterns = [
     path('auth-token/', TokenAPIView.as_view(), name='auth_token'),
 
     path('', include('store.urls')),
-    path('products', include('product.urls')),
+    path('products/', include('product.urls')),
     path('customer', include('customer.urls')),
 ] + \
     static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
