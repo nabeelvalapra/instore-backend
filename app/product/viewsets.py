@@ -13,4 +13,4 @@ class ProductViewSet(
     lookup_field = 'slug'
 
     def get_queryset(self):
-        return self.queryset.filter(store=self.request.store).order_by('order')
+        return self.queryset.filter(store=self.request.store).order_by('-order')
