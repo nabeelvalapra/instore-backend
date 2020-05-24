@@ -6,7 +6,7 @@ from store.models import Store, Spotlight, Webdata, Tag
 class WebdataSerializer(serializers.ModelSerializer):
     class Meta:
         model = Webdata
-        fields = ('logo', 'theme_color', 'accent_color')
+        fields = ('logo', 'theme_color', 'accent_color', 'favicon')
 
 
 class TagSerializer(serializers.ModelSerializer):

@@ -29,6 +29,10 @@ class Webdata(BaseDateModel):
         upload_to="store/logo",
         null=True, blank=True
     )
+    favicon = models.ImageField(
+        upload_to="store/favicon",
+        null=True, blank=True
+    )
     theme_color = models.CharField(
         verbose_name=_("Theme Color Code"),
         max_length=7
